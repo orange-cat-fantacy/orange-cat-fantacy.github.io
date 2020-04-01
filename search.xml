@@ -196,9 +196,4 @@
 <p>试用UDP socket 编写聊天程序，直接调用一个函数Sendto() 就可以了（用IP访问），抓包一看，一个消息就是一个包，对方也没有确认，UDP就是加上一个封装头就出去了，不需要建立连接，自然也无需关闭连接。</p>
 ]]></content>
   </entry>
-  <entry>
-    <title>search</title>
-    <url>/2020/03/26/search/</url>
-    <content><![CDATA[]]></content>
-  </entry>
 </search>
