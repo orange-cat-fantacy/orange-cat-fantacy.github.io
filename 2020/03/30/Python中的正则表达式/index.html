@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Python中的正则表达式 - 黄杰的blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="python,network,computer science,"> 
+    <meta name="description" content="元字符和语法
+
+
+实例
+匹配串
+
+
+
+a.c
+abc
+
+
+a\.c
+a.c
+
+
+a[jq]k
+ajk&amp;amp;aqk
+
+
+a\dc
+a1c
+
+
+a\Dc
+abc
+
+
+a\s
+a s
+
+
+a*
+a&amp;a,"> 
+    <meta name="author" content="黄杰"> 
+    <link rel="alternative" href="atom.xml" title="黄杰的blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">黄杰的blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Python中的正则表达式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Python中的正则表达式</h1>
+        <div class="stuff">
+            <span>三月 30, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h1 id="元字符和语法"><a href="#元字符和语法" class="headerlink" title="元字符和语法"></a>元字符和语法</h1><table>
+<thead>
+<tr>
+<th align="center">实例</th>
+<th align="center">匹配串</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">a.c</td>
+<td align="center">abc</td>
+</tr>
+<tr>
+<td align="center">a\.c</td>
+<td align="center">a.c</td>
+</tr>
+<tr>
+<td align="center">a[jq]k</td>
+<td align="center">ajk&amp;aqk</td>
+</tr>
+<tr>
+<td align="center">a\dc</td>
+<td align="center">a1c</td>
+</tr>
+<tr>
+<td align="center">a\Dc</td>
+<td align="center">abc</td>
+</tr>
+<tr>
+<td align="center">a\s</td>
+<td align="center">a s</td>
+</tr>
+<tr>
+<td align="center">a*</td>
+<td align="center">a&amp;aaaaaaaa….</td>
+</tr>
+<tr>
+<td align="center">a+</td>
+<td align="center">aa&amp;aaaa…</td>
+</tr>
+<tr>
+<td align="center">a?</td>
+<td align="center">前一个字符0&amp;1次</td>
+</tr>
+<tr>
+<td align="center">a{m}</td>
+<td align="center">a后m个a</td>
+</tr>
+<tr>
+<td align="center">{mn}</td>
+<td align="center">m到n个前一字符</td>
+</tr>
+<tr>
+<td align="center">^</td>
+<td align="center">匹配每一行的开头</td>
+</tr>
+<tr>
+<td align="center">$</td>
+<td align="center">匹配每一行的末尾</td>
+</tr>
+<tr>
+<td align="center">\A&amp;\Z</td>
+<td align="center">仅匹配开头&amp;结尾</td>
+</tr>
+<tr>
+<td align="center">## 逻辑与分组</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">…..</th>
+<th align="center">…….</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">\</td>
+<td align="center">左右任意匹配一个（从左到右）</td>
+</tr>
+<tr>
+<td align="center">a(12|34)c</td>
+<td align="center">a34c</td>
+</tr>
+<tr>
+<td align="center">(?#)</td>
+<td align="center">忽略#后</td>
+</tr>
+<tr>
+<td align="center">(?!=…)</td>
+<td align="center">后面不是..</td>
+</tr>
+<tr>
+<td align="center">(?&lt;=…)</td>
+<td align="center">之前是…</td>
+</tr>
+</tbody></table>
+<h2 id="烦人的反斜杠"><a href="#烦人的反斜杠" class="headerlink" title="烦人的反斜杠"></a>烦人的反斜杠</h2><p>原生字符串“ ”直观的解决了问题</p>
+<h2 id="RE模块"><a href="#RE模块" class="headerlink" title="RE模块"></a>RE模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># encoding: UTF-8</span><br><span class="line">import re</span><br><span class="line"> </span><br><span class="line"># 将正则表达式编译成Pattern对象</span><br><span class="line">pattern &#x3D; re.compile(r&#39;hello&#39;)</span><br><span class="line"> </span><br><span class="line"># 使用Pattern匹配文本，获得匹配结果，无法匹配时将返回None</span><br><span class="line">match &#x3D; pattern.match(&#39;hello world!&#39;)</span><br><span class="line"> </span><br><span class="line">if match:</span><br><span class="line">    # 使用Match获得分组信息</span><br><span class="line">    print match.group()</span><br><span class="line"> </span><br><span class="line">### 输出 ###</span><br><span class="line"># hello</span><br></pre></td></tr></table></figure>
+<h3 id="re-compile-strPattern-flag"><a href="#re-compile-strPattern-flag" class="headerlink" title="re.compile(strPattern[, flag]):"></a>re.compile(strPattern[, flag]):</h3><p>这个方法是Pattern类的工厂方法，用于将字符串形式的正则表达式编译为Pattern对象。 第二个参数flag是匹配模式，取值可以使用按位或运算符’|’表示同时生效，比如re.I | re.M。另外，你也可以在regex字符串中指定模式，比如re.compile(‘pattern’, re.I | re.M)与re.compile(‘(?im)pattern’)是等价的。<br>可选值有：</p>
+<ul>
+<li>re.I(re.IGNORECASE): 忽略大小写（括号内是完整写法，下同）</li>
+<li>M(MULTILINE): 多行模式，改变’^’和’$’的行为（参见上图）</li>
+<li>S(DOTALL): 点任意匹配模式，改变’.’的行为</li>
+<li>L(LOCALE): 使预定字符类 \w \W \b \B \s \S 取决于当前区域设定</li>
+<li>U(UNICODE): 使预定字符类 \w \W \b \B \s \S \d \D 取决于unicode定义的字符属性</li>
+<li>X(VERBOSE): 详细模式。这个模式下正则表达式可以是多行，忽略空白字符，并可以加入注释。以下两个正则表达式是等价的：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; re.compile(r&quot;&quot;&quot;\d +  # the integral part</span><br><span class="line">                   \.    # the decimal point</span><br><span class="line">                   \d *  # some fractional digits&quot;&quot;&quot;, re.X)</span><br><span class="line">b &#x3D; re.compile(r&quot;\d+\.\d*&quot;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Match"><a href="#Match" class="headerlink" title="Match"></a>Match</h4><p>Match对象是一次匹配的结果，包含了很多关于此次匹配的信息，可以使用Match提供的可读属性或方法来获取这些信息。</p>
+<p><strong>属性</strong>：</p>
+<ul>
+<li><strong>string</strong>: 匹配时使用的文本。</li>
+<li><strong>re</strong>: 匹配时使用的Pattern对象。</li>
+<li><strong>pos</strong>: 文本中正则表达式开始搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。</li>
+<li><strong>endpos</strong>: 文本中正则表达式结束搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。</li>
+<li><strong>lastindex</strong>: 最后一个被捕获的分组在文本中的索引。如果没有被捕获的分组，将为None。</li>
+<li><strong>lastgroup</strong>: 最后一个被捕获的分组的别名。如果这个分组没有别名或者没有被捕获的分组，将为None。</li>
+</ul>
+<p><strong>方法</strong>：</p>
+<ul>
+<li><p><strong>group</strong>([group1, …]):<br>获得一个或多个分组截获的字符串；指定多个参数时将以元组形式返回。group1可以使用编号也可以使用别名；编号0代表整个匹配的子串；不填写参数时，返回group(0)；没有截获字符串的组返回None；截获了多次的组返回最后一次截获的子串。</p>
+</li>
+<li><p><strong>groups([default])</strong>:<br>以元组形式返回全部分组截获的字符串。相当于调用group(1,2,…last)。default表示没有截获字符串的组以这个值替代，默认为None。</p>
+</li>
+<li><p><strong>groupdict</strong>([default]):<br>返回以有别名的组的别名为键、以该组截获的子串为值的字典，没有别名的组不包含在内。default含义同上。</p>
+</li>
+<li><p><strong>start([group])</strong>:<br>返回指定的组截获的子串在string中的起始索引（子串第一个字符的索引）。group默认值为0。</p>
+</li>
+<li><p><strong>end([group])</strong>:<br>返回指定的组截获的子串在string中的结束索引（子串最后一个字符的索引+1）。group默认值为0。</p>
+</li>
+<li><p><strong>span([group])</strong>:<br>返回(start(group), end(group))。</p>
+</li>
+<li><p><strong>expand</strong>(template):<br>将匹配到的分组代入template中然后返回。template中可以使用\id或\g<id>、\g<name>引用分组，但不能使用编号0。\id与\g<id>是等价的；但\10将被认为是第10个分组，如果你想表达\1之后是字符’0’，只能使用\g&lt;1&gt;0。</p>
+</li>
+</ul>
+<h4 id="Pattern"><a href="#Pattern" class="headerlink" title="Pattern"></a>Pattern</h4><p>Pattern对象是一个编译好的正则表达式，通过Pattern提供的一系列方法可以对文本进行匹配查找。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import re</span><br><span class="line">p &#x3D; re.compile(r&#39;(\w+) (\w+)(?P&lt;sign&gt;.*)&#39;, re.DOTALL)</span><br><span class="line"> </span><br><span class="line">print &quot;p.pattern:&quot;, p.pattern</span><br><span class="line">print &quot;p.flags:&quot;, p.flags</span><br><span class="line">print &quot;p.groups:&quot;, p.groups</span><br><span class="line">print &quot;p.groupindex:&quot;, p.groupindex</span><br><span class="line"> </span><br><span class="line">### output ###</span><br><span class="line"># p.pattern: (\w+) (\w+)(?P&lt;sign&gt;.*)</span><br><span class="line"># p.flags: 16</span><br><span class="line"># p.groups: 3</span><br><span class="line"># p.groupindex: &#123;&#39;sign&#39;: 3&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上就是Python对于正则表达式的支持 qwq !!</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://mp.111ttt.cn/mp3music/24147644.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#元字符和语法"><span class="toc-number">1.</span> <span class="toc-text">元字符和语法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#烦人的反斜杠"><span class="toc-number">1.1.</span> <span class="toc-text">烦人的反斜杠</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RE模块"><span class="toc-number">1.2.</span> <span class="toc-text">RE模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#re-compile-strPattern-flag"><span class="toc-number">1.2.1.</span> <span class="toc-text">re.compile(strPattern[, flag]):</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Match"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">Match</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Pattern"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">Pattern</span></a></li></ol></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
