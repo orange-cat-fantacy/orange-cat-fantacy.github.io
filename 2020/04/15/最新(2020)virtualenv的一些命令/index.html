@@ -139,7 +139,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    526 字
+                    550 字
                   </span>
                 
 
@@ -149,7 +149,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    6
+                    7
                      分钟
                   </span>
                 
@@ -182,14 +182,17 @@
 <p><a href="http://www.wailian.work/album/xUiBn/?sort=date_desc&amp;pagev=1" target="_blank" rel="noopener">http://www.wailian.work/album/xUiBn/?sort=date_desc&amp;pagev=1</a></p>
 <p>virtualenv venv2 -p python3 安装指定版本</p>
 <p>source bin/active 进入虚拟环境</p>
-<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>虚拟环境是一个包含二进制程序和 shell 脚本的目录。二进制程序包含执行脚本的 <em>python</em> 和安装其它模块的 <em>pip</em>。脚本包括激活环境的脚本，<a href="https://wiki.archlinux.org/index.php/Bash" target="_blank" rel="noopener">bash</a>, csh 和<a href="https://wiki.archlinux.org/index.php/Fish" target="_blank" rel="noopener">fish</a> 个有一个。这个虚拟环境模拟了一个完整的 <a href="https://wiki.archlinux.org/index.php/Python" target="_blank" rel="noopener">Python</a> 执行环境和需要的模块，将程序运行的环境与系统其它部分隔离开来。</p>
+<p>Activate your virtualenv:</p>
+<p>on Windows, virtualenv creates a batch file</p>
+<pre><code>\env\Scripts\activate.bat</code></pre><p>to activate virtualenv on Windows, activate script is in the Scripts folder :</p>
+<pre><code>\path\to\env\Scripts\activate</code></pre><p>Example:</p>
+<pre><code>C:\Users\&#39;Username&#39;\venv\Scripts\activate.bat</code></pre><h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>虚拟环境是一个包含二进制程序和 shell 脚本的目录。二进制程序包含执行脚本的 <em>python</em> 和安装其它模块的 <em>pip</em>。脚本包括激活环境的脚本，<a href="https://wiki.archlinux.org/index.php/Bash" target="_blank" rel="noopener">bash</a>, csh 和<a href="https://wiki.archlinux.org/index.php/Fish" target="_blank" rel="noopener">fish</a> 个有一个。这个虚拟环境模拟了一个完整的 <a href="https://wiki.archlinux.org/index.php/Python" target="_blank" rel="noopener">Python</a> 执行环境和需要的模块，将程序运行的环境与系统其它部分隔离开来。</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><a href="https://wiki.archlinux.org/index.php/Python" target="_blank" rel="noopener">Python</a> 从 3.3 开始包含了 <em>venv</em> 程序，无需单独安装。 如果使用的是老版本的 Python, 需要额外<a href="https://wiki.archlinux.org/index.php/安装" target="_blank" rel="noopener">安装</a> <em>virtualenv</em>。</p>
 <ul>
 <li>Python 3.3+: <a href="https://www.archlinux.org/packages/?name=python" target="_blank" rel="noopener">python</a></li>
 <li>Python 3: <a href="https://www.archlinux.org/packages/?name=python-virtualenv" target="_blank" rel="noopener">python-virtualenv</a></li>
 <li>Python 2: <a href="https://www.archlinux.org/packages/?name=python2-virtualenv" target="_blank" rel="noopener">python2-virtualenv</a></li>
 </ul>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>不同工具的使用方式基本相同。</p>
 <h3 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h3><p>使用<em>venv</em> 或 <em>virtualenv</em> 在项目目录创建虚拟环境，请将 venv 目录加入版本控制系统，这样只要执行 <code>pip freeze</code> 就可以重建虚拟环境。</p>
 <h4 id="venv"><a href="#venv" class="headerlink" title="venv"></a>venv</h4><p><strong>Note:</strong> 此方法代替了从 <a href="https://www.archlinux.org/packages/?name=python" target="_blank" rel="noopener">python</a> 3.6 就不建议使用的 <em>pyvenv</em>。</p>
 <p><a href="https://www.archlinux.org/packages/?name=python" target="_blank" rel="noopener">python</a> 软件包从 3.3 开始就提供了此工具:</p>
