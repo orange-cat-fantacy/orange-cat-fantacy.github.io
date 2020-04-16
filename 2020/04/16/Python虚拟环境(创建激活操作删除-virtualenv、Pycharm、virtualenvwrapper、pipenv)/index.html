@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="黄杰">
+  <meta name="keywords" content="python,随笔">
+  <title>Python虚拟环境(创建激活操作删除-virtualenv、Pycharm、virtualenvwrapper、pipenv) - huangjie&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_9n5xqdrq0nc.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>huangjie's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              Home</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              Archives</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              Categories</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              Tags</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-04-16 09:44">
+                    Thursday, April 16th 2020, 9:44 am
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    2.3k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    29
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="Python基础42-虚拟环境-创建-激活-操作-删除-virtualenv、Pycharm、virtualenvwrapper、pipenv"><a href="#Python基础42-虚拟环境-创建-激活-操作-删除-virtualenv、Pycharm、virtualenvwrapper、pipenv" class="headerlink" title="Python基础42-虚拟环境(创建/激活/操作/删除-virtualenv、Pycharm、virtualenvwrapper、pipenv)"></a>Python基础42-虚拟环境(创建/激活/操作/删除-virtualenv、Pycharm、virtualenvwrapper、pipenv)</h1><h1 id="1-概念"><a href="#1-概念" class="headerlink" title="1 概念"></a>1 概念</h1><ul>
+<li>一个独立的局部的 Python 环境</li>
+<li>完全模拟系统全局 Python 环境的使用，如安装、卸载包到逻辑操作等</li>
+</ul>
+<h1 id="2-作用"><a href="#2-作用" class="headerlink" title="2 作用"></a>2 作用</h1><ul>
+<li>让项目运行在一个独立的局部的 Python 环境中，使采用不同环境的项目互不干扰。</li>
+</ul>
+<h1 id="3-安装虚拟环境"><a href="#3-安装虚拟环境" class="headerlink" title="3 安装虚拟环境"></a>3 安装虚拟环境</h1><ul>
+<li>virtualenv，就是一个三方包</li>
+<li>安装命令，pip install virtualenv</li>
+<li>使用文档，<a href="https://virtualenv.pypa.io/en/stable/userguide/" target="_blank" rel="noopener">https://virtualenv.pypa.io/en/stable/userguide/</a></li>
+</ul>
+<p>安装过程中，如果出现如下 error 信息是，可以尝试切换源重新下载<br> 阿里源，不行</p>
+<pre><code class="kotlin">$ pip install virtualenv                                                     
+Looking in indexes: http://pypi.douban.com/pypi/simple
+Collecting virtualenv
+  The repository located at pypi.douban.com is not a trusted or secure host and is being ignored. If this repository is available via HTTPS we recommend you use HTTPS instead, otherwise you may silence this warning and allow it anyway with &#39;--trusted-host pypi.douban.com&#39;.
+  Could not find a version that satisfies the requirement virtualenv (from versions: )
+No matching distribution found for virtualenv</code></pre>
+<p>豆瓣源，不行</p>
+<pre><code class="csharp">$ pip install virtualenv --trusted-host pypi.douban.com                      
+Looking in indexes: http://pypi.douban.com/pypi/simple
+Collecting virtualenv
+  Could not find a version that satisfies the requirement virtualenv (from versions: )
+No matching distribution found for virtualenv</code></pre>
+<p>官方源，不行</p>
+<pre><code class="csharp">$ pip install virtualenv -i https://pypi.python.org/simple/                  
+Looking in indexes: https://pypi.python.org/simple/
+Collecting virtualenv
+  Downloading https://files.pythonhosted.org/packages/b6/30/96a02b2287098b23b875bc8c2f58071c35d2efe84f747b64d523721dc2b5/virtualenv-16.0.0-py2.py3-none-any.whl (1.9MB)
+    4% |█▌                              | 92kB 2.7kB/s eta 0:11:08Exception:
+Traceback (most recent call last):
+ ....
+pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host=&#39;files.pythonhosted.org&#39;, port=443): Read timed out.</code></pre>
+<p>清华源，可以</p>
+<pre><code class="cpp">$ pip install virtualenv -i https://pypi.tuna.tsinghua.edu.cn/simple/      
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple/
+Collecting virtualenv
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/ed/ea/e20b5cbebf45d3096e8138ab74eda139595d827677f38e9dd543e6015bdf/virtualenv-15.2.0-py2.py3-none-any.whl (2.6MB)
+    100% |████████████████████████████████| 2.6MB 4.1MB/s
+Installing collected packages: virtualenv
+Successfully installed virtualenv-15.2.0</code></pre>
+<h1 id="4-使用虚拟环境"><a href="#4-使用虚拟环境" class="headerlink" title="4 使用虚拟环境"></a>4 使用虚拟环境</h1><h2 id="4-1-创建一个局部的隔离的虚拟环境"><a href="#4-1-创建一个局部的隔离的虚拟环境" class="headerlink" title="4.1 创建一个局部的隔离的虚拟环境"></a>4.1 创建一个局部的隔离的虚拟环境</h2><h3 id="4-1-1-创建命令：virtualenv-虚拟环境名称"><a href="#4-1-1-创建命令：virtualenv-虚拟环境名称" class="headerlink" title="4.1.1 创建命令：virtualenv 虚拟环境名称"></a>4.1.1 创建命令：virtualenv 虚拟环境名称</h3><pre><code class="undefined">virtualenv ENV</code></pre>
+<ul>
+<li>cd 到存放虚拟环境的的地址</li>
+<li>执行命令virtualenv ENV，创建名为ENV 的虚拟环境</li>
+</ul>
+<pre><code class="bash">% cd /Users/xxx/Desktop/testvirtuals                    
+
+% virtualenv virtual1                   
+Using base prefix &#39;/usr/local/Cellar/python3/3.6.4_1/Frameworks/Python.framework/Versions/3.6&#39;
+New python executable in /Users/xxx/Desktop/testvirtuals/virtual1/bin/python3.6
+Also creating executable in /Users/xxx/Desktop/testvirtuals/virtual1/bin/python
+Installing setuptools, pip, wheel...done.</code></pre>
+<p>创建虚拟环境结果</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-6999784eb34dd793.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/818/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>注意：</p>
+<ul>
+<li><code>Using base prefix</code> 使用的是3.6版本环境，原因是 virtualenv 安装位置就在3.6下，所以默认使用的是其安装位置版本的 Python 环境</li>
+<li>虚拟环境文件包括：Python解析器，包管理工具(setuptools, pip, wheel)，三方包等</li>
+<li>即使创建的 bin 脚本命令集含有 python 和 python3两个脚本，实际它们的版本都是3.6，这个防止使用者理解不足导致已为使用 python 命令时是使用 Python2.x 版本。</li>
+</ul>
+<pre><code class="jsx">% /Users/xxx/Desktop/testvirtuals/virtual1/bin/python3 --version
+Python 3.6.4
+
+% /Users/xxx/Desktop/testvirtuals/virtual1/bin/python --version
+Python 3.6.4</code></pre>
+<h3 id="4-1-2-指定-Python-版本创建虚拟环境"><a href="#4-1-2-指定-Python-版本创建虚拟环境" class="headerlink" title="4.1.2 指定 Python 版本创建虚拟环境"></a>4.1.2 指定 Python 版本创建虚拟环境</h3><p>可选参数：-p<br> 指定 Python2.x 版本创建虚拟环境</p>
+<pre><code class="bash">virtualenv -p /usr/local/bin/python2.7 testvirtual2</code></pre>
+<p>执行效果</p>
+<pre><code class="bash">$ virtualenv -p /usr/local/bin/python2.7 ENV
+Running virtualenv with interpreter /usr/local/bin/python2.7
+New python executable in /Users/minyu_leung/Desktop/virtual2/ENV/bin/python2.7
+Also creating executable in /Users/minyu_leung/Desktop/virtual2/ENV/bin/python
+Installing setuptools, pip, wheel...done.</code></pre>
+<h3 id="4-1-3-是否继承系统三方库-system-site-packages"><a href="#4-1-3-是否继承系统三方库-system-site-packages" class="headerlink" title="4.1.3 是否继承系统三方库 --system-site-packages"></a>4.1.3 是否继承系统三方库 <code>--system-site-packages</code></h3><p>添加参数<code>--system-site-packages</code>，项目检索库的时候，也会到系统的三方库中找<br> 不添加时，默认只到虚拟环境中查找库</p>
+<pre><code class="undefined">virtualenv --system-site-packages ENV</code></pre>
+<h2 id="4-2-激活-退出-虚拟环境"><a href="#4-2-激活-退出-虚拟环境" class="headerlink" title="4.2 激活/退出 虚拟环境"></a>4.2 激活/退出 虚拟环境</h2><p>在 Mac 下，激活所创建的虚拟环境步骤：</p>
+<ol>
+<li>cd 到虚拟环境文件夹目录</li>
+</ol>
+<pre><code class="bash">cd /Users/xxx/Desktop/testvirtuals/virtual1</code></pre>
+<ol>
+<li>执行命令 source bin/activate，shell 会打印出已激活的虚拟环境名称</li>
+</ol>
+<pre><code class="bash">$ source bin/activate
+(virtual1)</code></pre>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-f0e1aeda8aa76b6e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/977/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>带 source 命令</p>
+<ol>
+<li><p>验证当前确实在已激活的虚拟环境中，执行命令 pip –version 和 pip list</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-6cbe76da12ffc2e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1118/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>每次打印后都会提示(virtual1)，所在环境是虚拟环境</p>
+</li>
+<li><p>退出虚拟环境，在激活的虚拟环境中，执行命令 deactivate</p>
+</li>
+</ol>
+<pre><code class="ruby">$ deactivate</code></pre>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-96810edb63e6c71e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1018/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>注意，不用带 source 命令</p>
+<ol>
+<li><p>验证已经退出，执行命令 pip –version 和 pip list</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-acc089c067eaba88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1020/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>结果都是来自系统环境</p>
+</li>
+<li><p>注意：如果系统是 Windows 的话，则不需要带上 source 命令，直接 cd 进入Scripts脚本文件夹中，然后执行 activate 和 deactivate 脚本即可。与 Mac 不同的是，虚拟环境的 bin 目录下只有 activate 脚本，没有 deactivate 脚本。</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-d1b30e5a43c651cf.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/775/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>Windows 下的虚拟环境 Scripts 文件夹文件目录</p>
+</li>
+</ol>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-a37973ef28926b56.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/633/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>Mac 虚拟环境 bin 目录文件</p>
+<p><a href="https://virtualenv.pypa.io/en/stable/userguide/" target="_blank" rel="noopener">使用文档</a>中也有说 source 使用原因：</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-2bfe425e8159747b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/777/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="4-3-在激活状态下，操作"><a href="#4-3-在激活状态下，操作" class="headerlink" title="4.3 在激活状态下，操作"></a>4.3 在激活状态下，操作</h2><ol>
+<li>操作三方块<br> pip install requests</li>
+<li>执行 py 文件<br> python xx.py</li>
+</ol>
+<p>以上操作均作用在虚拟环境中。</p>
+<h2 id="4-4-删除虚拟环境"><a href="#4-4-删除虚拟环境" class="headerlink" title="4.4 删除虚拟环境"></a>4.4 删除虚拟环境</h2><ul>
+<li>直接删除虚拟环境所在目录即</li>
+</ul>
+<h2 id="4-5-项目交接"><a href="#4-5-项目交接" class="headerlink" title="4.5 项目交接"></a>4.5 项目交接</h2><p>场景：确保共享的项目能够在其他电脑上正常运行<br> 解决：</p>
+<ol>
+<li>方案一：</li>
+</ol>
+<ul>
+<li>连同虚拟环境和项目一起拷贝给他人</li>
+</ul>
+<ol>
+<li>方案二：</li>
+</ol>
+<ul>
+<li>在虚拟环境中，冻结依赖需求文本</li>
+<li>把项目和依赖需求文本给他人</li>
+<li>他人在本地创建一个新的虚拟环境，并根据依赖需求文本安装相关库</li>
+</ul>
+<p><strong>技能点</strong>：</p>
+<ul>
+<li>虚拟环境的创建</li>
+<li>虚拟环境的激活</li>
+<li>操作虚拟环境</li>
+<li>冻结项目需求文本 pip freeze &gt; requirements.txt</li>
+<li>根据需求文本，安装项目依赖库 pip install -r requirements.txt （在激活的虚拟环境中）</li>
+</ul>
+<h1 id="5-Pycharm-中使用虚拟环境"><a href="#5-Pycharm-中使用虚拟环境" class="headerlink" title="5 Pycharm 中使用虚拟环境"></a>5 Pycharm 中使用虚拟环境</h1><ol>
+<li><p>创建项目</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-96770a324e09b1c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/779/format/webp" srcset="/img/loading.gif" alt="img"></p>
+</li>
+<li><p>在创建项目时，使用虚拟环境</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-f386466e4e33fa57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/862/format/webp" srcset="/img/loading.gif" alt="img"></p>
+</li>
+</ol>
+<p>创建后，目录结构</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-4438a8e2c308b040.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/593/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<ol>
+<li><p>在项目偏好设置里可以切换环境和安装需要的库</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-25d73f4640a84b5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1001/format/webp" srcset="/img/loading.gif" alt="img"></p>
+</li>
+</ol>
+<p>总结：<br> IDE 让虚拟环境的使用更加方便，图形化创建和切换，包的管理等。让程序员更关注项目的开发而非各种命令的记忆。</p>
+<h1 id="6-虚拟环境进阶使用"><a href="#6-虚拟环境进阶使用" class="headerlink" title="6 虚拟环境进阶使用"></a>6 虚拟环境进阶使用</h1><h2 id="6-1-集中式虚拟环境管理"><a href="#6-1-集中式虚拟环境管理" class="headerlink" title="6.1 集中式虚拟环境管理"></a>6.1 集中式虚拟环境管理</h2><p><a href="https://pypi.org/project/virtualenvwrapper/" target="_blank" rel="noopener">virtualenvwrapper</a><br> <a href="https://virtualenvwrapper.readthedocs.io/en/latest/" target="_blank" rel="noopener">使用文档</a></p>
+<ol>
+<li>通过virtualenvwrapper创建的虚拟环境都会统一存放到指定位置统一管理</li>
+<li>方便在多个虚拟环境间切换</li>
+<li>更加方便的去使用 virtualenv</li>
+</ol>
+<ul>
+<li>快速创建虚拟环境并激活</li>
+</ul>
+<pre><code class="undefined">mkvirtualenv venv1</code></pre>
+<ul>
+<li>快速在多个虚拟环境中切换</li>
+</ul>
+<pre><code class="undefined">workon venv2</code></pre>
+<ul>
+<li>快速关闭虚拟环境</li>
+</ul>
+<pre><code class="undefined">deactivate</code></pre>
+<ul>
+<li>快速删除虚拟环境</li>
+</ul>
+<pre><code class="undefined">rmvirtualenv env1</code></pre>
+<ul>
+<li>查看所有创建的虚拟环境</li>
+</ul>
+<pre><code class="undefined">lsvirtualenv</code></pre>
+<p><strong>弊端</strong></p>
+<ul>
+<li>只是对 virtualenv 的使用封装，包的安装及虚拟环境的操作依然是分离的。</li>
+<li>并未具备对项目包的依赖管理及需求文本的生成操作封装</li>
+</ul>
+<h2 id="6-2-更加基于项目的虚拟环境管理"><a href="#6-2-更加基于项目的虚拟环境管理" class="headerlink" title="6.2 更加基于项目的虚拟环境管理"></a>6.2 更加基于项目的虚拟环境管理</h2><h3 id="6-2-1-pipenv-使用优点"><a href="#6-2-1-pipenv-使用优点" class="headerlink" title="6.2.1 pipenv 使用优点"></a>6.2.1 pipenv 使用优点</h3><ol>
+<li>推荐使用：<a href="https://pypi.org/project/pipenv/" target="_blank" rel="noopener">pipenv</a>，是  pip + virtualenv 结合体，解决了virtualenvwrapper弊端</li>
+<li>会自动帮你创建虚拟环境，以及安装三方库</li>
+<li>会自动的记录你的项目依赖的所有三方库</li>
+<li>使用 pipfile 和 pipfile.lock取代了 requirements.txt</li>
+</ol>
+<p><a href="https://pypi.org/project/pipenv/" target="_blank" rel="noopener">使用文档</a><br> <a href="https://pypi.org/project/pipenv/" target="_blank" rel="noopener">使用文档2</a></p>
+<p>pipenv 命令使用一览</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-2a8f6aae311ed8f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1113/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<blockquote>
+<p>pipenv 命令都是参照项目中的 Pipfile 位置和内容操作的，类似 cocoapods 的 pod 命令参照podfile文件操作。</p>
+</blockquote>
+<h3 id="6-2-2-使用步骤"><a href="#6-2-2-使用步骤" class="headerlink" title="6.2.2 使用步骤"></a>6.2.2 使用步骤</h3><h3 id="6-2-2-1-创建虚拟环境"><a href="#6-2-2-1-创建虚拟环境" class="headerlink" title="6.2.2.1 创建虚拟环境"></a>6.2.2.1 创建虚拟环境</h3><pre><code class="bash">1. cd 到项目文件夹目录下
+2. 在该目录下执行命令
+pipenv --two # 指定参照Python版本
+或
+pipenv --three
+
+3. 查看相关信息
+查看位置：pipenv --where
+查看虚拟环境位置：pipenv --venv
+查看解析器信息：pipenv --py</code></pre>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-d7b94c520db1c332.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/885/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-91582750ee430c67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/469/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<h3 id="6-2-2-2-激活虚拟环境"><a href="#6-2-2-2-激活虚拟环境" class="headerlink" title="6.2.2.2 激活虚拟环境"></a>6.2.2.2 激活虚拟环境</h3><pre><code class="undefined">pipenv shell</code></pre>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-6a4c448fb9c3d051.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1119/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<h3 id="6-2-2-3-在激活状态下操作"><a href="#6-2-2-3-在激活状态下操作" class="headerlink" title="6.2.2.3 在激活状态下操作"></a>6.2.2.3 在激活状态下操作</h3><ol>
+<li>执行 py 文件，python xx.py ，其中 python 指的是虚拟环境 Python版本</li>
+<li>安装包</li>
+</ol>
+<pre><code class="undefined">pipenv install requests</code></pre>
+<blockquote>
+<p>注意：不要使用 pip install 命令，使用的话虽然可以在虚拟环境中安装对应的包，但是不会更新 PIPfile 和 PIPfile.lock</p>
+</blockquote>
+<blockquote>
+<p>命令：pipenv install [三方库名]<br> 作用：<br> 一、检测当前项目对应的虚拟环境是否存在，不存在则创建。如果当前项目已经存在 Pipfile 和 Pipfile.lock 文件，则参照这两个文件内容创建虚拟环境并安装文件指定的三方库<br> 二、在虚拟环境中安装指定三方库，如果没有指定，则不安装<br> 三、在项目目录下，通过 Pipfile 和 Pipfile.lock 记录当下已经安装的三方库信息</p>
+</blockquote>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-691e4b565fd095f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1127/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<ol>
+<li>查看包的依赖结构</li>
+</ol>
+<pre><code class="undefined">pipenv graph</code></pre>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-71f4e8995bf218ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1117/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<ol>
+<li>卸载包</li>
+</ol>
+<pre><code class="undefined">pipenv uninstall requests</code></pre>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-255f64f0d028c0f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1117/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<h3 id="6-2-2-4-退出虚拟环境"><a href="#6-2-2-4-退出虚拟环境" class="headerlink" title="6.2.2.4 退出虚拟环境"></a>6.2.2.4 退出虚拟环境</h3><pre><code class="bash">exit
+或
+直接关闭 shell 窗口</code></pre>
+<h3 id="6-2-2-5-删除虚拟环境"><a href="#6-2-2-5-删除虚拟环境" class="headerlink" title="6.2.2.5 删除虚拟环境"></a>6.2.2.5 删除虚拟环境</h3><pre><code class="bash">先 cd 进入 Pipfile 文件目录位置
+pipenv --rm</code></pre>
+<p><img src="https:////upload-images.jianshu.io/upload_images/748014-0bf378bb4f9a5356.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/907/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="6-3-项目交接"><a href="#6-3-项目交接" class="headerlink" title="6.3 项目交接"></a>6.3 项目交接</h2><h3 id="6-3-1-上传项目时，应该包含的文件有？"><a href="#6-3-1-上传项目时，应该包含的文件有？" class="headerlink" title="6.3.1 上传项目时，应该包含的文件有？"></a>6.3.1 上传项目时，应该包含的文件有？</h3><p>应该包括文件有：</p>
+<ol>
+<li>包和模块源码</li>
+<li>Pipfile 和 Pipfile.lock</li>
+</ol>
+<h3 id="6-3-2-拿到共享的项目后如何操作？"><a href="#6-3-2-拿到共享的项目后如何操作？" class="headerlink" title="6.3.2 拿到共享的项目后如何操作？"></a>6.3.2 拿到共享的项目后如何操作？</h3><p>操作步骤：</p>
+<ol>
+<li>cd 进入获取的项目文件夹目录内</li>
+<li>检查项目是否具有Pipfile 和 Pipfile.lock 文件 （此处应该是必须有的，因为是执行上述分享操作的人给你的项目嘛♪(∇*)啦啦）</li>
+<li>执行命令：</li>
+</ol>
+<pre><code class="undefined">pipenv install</code></pre>
+<p>作者：Jacob_LJ<br>链接：<a href="https://www.jianshu.com/p/a83a8f5d68dd" target="_blank" rel="noopener">https://www.jianshu.com/p/a83a8f5d68dd</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/15/%E6%9C%80%E6%96%B0(2020)virtualenv%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4/">
+                        <span class="hidden-mobile">最新(2020)virtualenv的一些命令</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').each(function () {
+        const pre = $(this);
+        if (pre.find('code.mermaid').length > 0) {
+          return;
+        }
+        pre.addClass('prettyprint  linenums');
+      });
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Python虚拟环境(创建激活操作删除-virtualenv、Pycharm、virtualenvwrapper、pipenv)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
