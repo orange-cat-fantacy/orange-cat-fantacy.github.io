@@ -139,7 +139,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    550 字
+                    565 字
                   </span>
                 
 
@@ -181,11 +181,10 @@
               <h1 id="最新-2020-virtualenv的一些命令"><a href="#最新-2020-virtualenv的一些命令" class="headerlink" title="最新(2020)virtualenv的一些命令"></a>最新(2020)virtualenv的一些命令</h1><p>which python3 查看python目录</p>
 <p><a href="http://www.wailian.work/album/xUiBn/?sort=date_desc&amp;pagev=1" target="_blank" rel="noopener">http://www.wailian.work/album/xUiBn/?sort=date_desc&amp;pagev=1</a></p>
 <p>virtualenv venv2 -p python3 安装指定版本</p>
-<p>source bin/active 进入虚拟环境</p>
-<p>Activate your virtualenv:</p>
-<p>on Windows, virtualenv creates a batch file</p>
-<pre><code>\env\Scripts\activate.bat</code></pre><p>to activate virtualenv on Windows, activate script is in the Scripts folder :</p>
-<pre><code>\path\to\env\Scripts\activate</code></pre><p>Example:</p>
+<p>source bin/active 进入虚拟环境(已经更改了入口,现已不适用)</p>
+<h2 id="激活环境"><a href="#激活环境" class="headerlink" title="激活环境"></a>激活环境</h2><p>在Windows上 virtualenv 创建了batch file</p>
+<pre><code>\env\Scripts\activate.bat</code></pre><p>启动脚本在脚本文件夹</p>
+<pre><code>\path\to\env\Scripts\activate</code></pre><p>如:</p>
 <pre><code>C:\Users\&#39;Username&#39;\venv\Scripts\activate.bat</code></pre><h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>虚拟环境是一个包含二进制程序和 shell 脚本的目录。二进制程序包含执行脚本的 <em>python</em> 和安装其它模块的 <em>pip</em>。脚本包括激活环境的脚本，<a href="https://wiki.archlinux.org/index.php/Bash" target="_blank" rel="noopener">bash</a>, csh 和<a href="https://wiki.archlinux.org/index.php/Fish" target="_blank" rel="noopener">fish</a> 个有一个。这个虚拟环境模拟了一个完整的 <a href="https://wiki.archlinux.org/index.php/Python" target="_blank" rel="noopener">Python</a> 执行环境和需要的模块，将程序运行的环境与系统其它部分隔离开来。</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><a href="https://wiki.archlinux.org/index.php/Python" target="_blank" rel="noopener">Python</a> 从 3.3 开始包含了 <em>venv</em> 程序，无需单独安装。 如果使用的是老版本的 Python, 需要额外<a href="https://wiki.archlinux.org/index.php/安装" target="_blank" rel="noopener">安装</a> <em>virtualenv</em>。</p>
 <ul>
