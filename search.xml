@@ -466,4 +466,16 @@ pipenv --rm</code></pre>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(venv)Mac:myproject michael$ deactivate </span><br><span class="line">Mac:myproject michael$</span><br></pre></td></tr></table></figure>
 ]]></content>
   </entry>
+  <entry>
+    <title>网络</title>
+    <url>/2020/03/26/%E7%BD%91%E7%BB%9C/</url>
+    <content><![CDATA[<h1 id="网络层次划分"><a href="#网络层次划分" class="headerlink" title="网络层次划分"></a>网络层次划分</h1><p>应用层<br>表示层<br>会话层<br>传输层<br>网络层<br>数据链路层<br>物理层</p>
+<h1 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h1><h2 id="tcp-ip"><a href="#tcp-ip" class="headerlink" title="tcp ip"></a>tcp ip</h2><p>TCP/IP协议涵盖了OSI参考模型的第三层、第四层，即网络层、传输层。TCP/IP也不是只有TCP + IP这两种协议，它是协议栈的统称，它还包括 ARP，ICMP，IGMP，UDP，以及让域名访问成为可能的DNS，以及电脑/手机可以自动获取IP地址的DHCP。当然还有形形色色的应用层的协议如 HTTP / SMTP / FTP 等。</p>
+<p>《TCP/IP协议》详解卷一，是一本很好的教材，一条消息竟然双向耗费9个包，仅仅是调用一次connect（）建立连接，调用一次 send（），然后程序退出。</p>
+<p>TCP建立连接<br>看TCP如何建立连接，建立连接需要三个包的交互，这个应该是connect()完成的。</p>
+<p>TCP发送数据<br>然后看到自己的消息内容是一个包，对方没有数据，只有确认ACK，这是两个包，这个由 send () 触发。</p>
+<p>TCP释放连接<br>然后系统自动退出，虽然我的程序没有调用什么函数，但是系统自动帮我调用了 close () 函数，于是又触发了TCP 关闭连接，这是四个包。</p>
+<p>试用UDP socket 编写聊天程序，直接调用一个函数Sendto() 就可以了（用IP访问），抓包一看，一个消息就是一个包，对方也没有确认，UDP就是加上一个封装头就出去了，不需要建立连接，自然也无需关闭连接。</p>
+]]></content>
+  </entry>
 </search>
