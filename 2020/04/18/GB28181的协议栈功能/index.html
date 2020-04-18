@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="黄杰">
   <meta name="keywords" content="python,随笔">
-  <title>Archives - huangjie&#39;s blog</title>
+  <title>GB28181的协议栈功能 - huangjie&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
@@ -42,7 +42,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -125,6 +125,38 @@
             </span>
 
             
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-04-18 09:43">
+                    Saturday, April 18th 2020, 9:43 am
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    535 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    5
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
           </div>
 
           
@@ -135,55 +167,78 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">10 posts in total.</p>
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/2020/03/30/Python%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Python中的正则表达式</span>
-      <span style="float: right;">03-30</span>
-    </a>
-  
-    
-    <a href="/2020/03/27/python%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%8D%87%E7%BA%A7/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">python环境变量升级</span>
-      <span style="float: right;">03-27</span>
-    </a>
-  
-    
-    <a href="/2020/03/27/virtualenv%E7%9A%84%E5%AE%89%E8%A3%85/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">virtualenv的安装</span>
-      <span style="float: right;">03-27</span>
-    </a>
-  
-    
-    <a href="/2020/03/26/%E7%BD%91%E7%BB%9C/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">网络</span>
-      <span style="float: right;">03-26</span>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>GB28181的协议栈功能。</p>
+<pre><code>         GB/T-28181协议其实就是在国际上通用的SIP协议进行私有化定制，流媒体方面就是在国际最流行的编码上进行封装（当然也有我们国家的编码标准SVAC）。
 
+         既然是国际上通用协议，那肯定就可以借助开源组织的力量了，要知道这是全球最大的软件组织，几乎所有的程序员都为之敬佩！开源组织给了推进计算机技术发展的很好良方。SIP协议实现完全可以用osip来作为基础协议栈（至少我看到绝大多数厂家是如此实现，海康、大华。。。。），使用开源没什么不好的，至少我们知道他们是稳定的，可靠的，会一直维护的。
 
+       我采用的是libosip+libexosip+libxml来实现IPC和平台协议功能，前面两者负责sip协议的实现，libxml用来封装和解析实体信令。通过3~4年的市场应用感觉挺稳定的。
+
+       流媒体方面：从编码中获取的h.264+g711的视音频帧，进行PS媒体协议封装（自己写的PS封装协议），再经过RTP传输协议（自己实现）发送至平台。
+
+       平台对收到的RTP流媒体进行解RTP,解PS，再进行h.264+g711的解码。</code></pre><p>  GB28181协议已经慢慢的进行了规范完善，现在大的趋势也已经是这样，虽然以前有很多的私有协议平台，但新建的平安城市等政府都需要能支持GB28181的互联互通，GB28181协议还有互联功能，这个功能比ONVIF好很多，因为可以进行大面积的组网，可以有上下级平台的区分，这一点是ONVIF不能做到的。</p>
+<pre><code>       ONVIF协议其实也有很多不足，如对事件的具体定义，如对视频分析的定义都是模糊的。用户开发自己的需要自己定义，而且没有对流媒体的方面的定义，因为媒体是通过RTSP协议进行的。</code></pre>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
               </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/18/shell%E5%91%BD%E4%BB%A4/">
+                        <span class="hidden-mobile">shell命令</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
             </div>
+
+            
           </div>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
   </main>
 
@@ -247,6 +302,34 @@
 
 
 
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
 
 
   <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
@@ -261,6 +344,20 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').each(function () {
+        const pre = $(this);
+        if (pre.find('code.mermaid').length > 0) {
+          return;
+        }
+        pre.addClass('prettyprint  linenums');
+      });
+      prettyPrint();
+    })
+  </script>
+
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
@@ -268,7 +365,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Archive&nbsp;",
+        "GB28181的协议栈功能&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
@@ -311,6 +408,20 @@
   </script>
 
 
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
 
 
 
