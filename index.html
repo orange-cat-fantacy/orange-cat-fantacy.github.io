@@ -153,6 +153,36 @@
     
     
     <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/04/18/mysql%E7%9A%84%E4%BD%BF%E7%94%A8/">mysql的使用</a>
+
+      <a href="/2020/04/18/mysql%E7%9A%84%E4%BD%BF%E7%94%A8/" class="index-excerpt">
+        
+        
+          
+        
+        <div>mysql 是一门关系型数据库, 不同于mongoDB 来说. mysql 需要给不同的表之间建立相互联系,以便确定完整性约束. 这里我们看看Mysql中常用的基本概念就差不多了.
+mysql常用术语
+冗余: 用来表示存储两倍的数据, 但会使数据访问更快. 相当于redis
+主键: 用来执行每个表的关键性数据, 并且,每个表中只有一个主键.
+外键: 这应该是mysql的关键, 使用外键来关联不同表</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-18
+          </div>
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
       <a class="index-header" href="/2020/04/18/GB28181%E7%9A%84%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%8A%9F%E8%83%BD/">GB28181的协议栈功能</a>
 
       <a href="/2020/04/18/GB28181%E7%9A%84%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%8A%9F%E8%83%BD/" class="index-excerpt">
@@ -479,34 +509,19 @@ Using base prefix &#3</div>
     </div>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/03/26/%E7%BD%91%E7%BB%9C/">网络</a>
-
-      <a href="/2020/03/26/%E7%BD%91%E7%BB%9C/" class="index-excerpt">
-        
-        
-          
-        
-        <div>网络层次划分应用层表示层会话层传输层网络层数据链路层物理层
-协议tcp ipTCP/IP协议涵盖了OSI参考模型的第三层、第四层，即网络层、传输层。TCP/IP也不是只有TCP + IP这两种协议，它是协议栈的统称，它还包括 ARP，ICMP，IGMP，UDP，以及让域名访问成为可能的DNS，以及电脑/手机可以自动获取IP地址的DHCP。当然还有形形色色的应用层的协议如 HTTP / SMTP /</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-03-26
-          </div>
-        
-        
-        
-      </div>
-    </div>
-  </div>
 
 
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 
