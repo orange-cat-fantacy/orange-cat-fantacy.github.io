@@ -139,7 +139,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    161 字
+                    140 字
                   </span>
                 
 
@@ -149,7 +149,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    3
+                    2
                      分钟
                   </span>
                 
@@ -178,9 +178,30 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import re</span><br><span class="line">import os</span><br><span class="line">import urllib</span><br><span class="line"></span><br><span class="line">headers&#x3D;&#123;&#39;User-Agent&#39;:&#39;Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;79.0.3945.130 Safari&#x2F;537.36&#39;&#125;</span><br><span class="line"></span><br><span class="line">response&#x3D;requests.get(&#39;https:&#x2F;&#x2F;www.vmgirls.com&#x2F;12985.html&#39;,headers&#x3D;headers)</span><br><span class="line"># print(response.request.headers)</span><br><span class="line">html&#x3D;response.text</span><br><span class="line"># 文件夹</span><br><span class="line">dir_name&#x3D;re.findall(&#39;&lt;h1 class&#x3D;&quot;post-title h3&quot;&gt;(.*?)&lt;&#x2F;h1&gt;&#39;,html)[-1]</span><br><span class="line"></span><br><span class="line">if not os.path.exists(dir_name):</span><br><span class="line">    os.mkdir(dir_name)</span><br><span class="line"></span><br><span class="line">urls&#x3D;re.findall(&#39;&lt;a href&#x3D;&quot;(.*?)&quot; alt&#x3D;&quot;.*?&quot; title&#x3D;&quot;.*?&quot;&gt;&#39;,html)</span><br><span class="line">print(urls)</span><br><span class="line"></span><br><span class="line">for url in urls:</span><br><span class="line">    file_name&#x3D;url.split(&#39;&#x2F;&#39;)[-1]</span><br><span class="line">    response&#x3D;requests.get(url,headers&#x3D;headers)</span><br><span class="line">    with open(dir_name+&#39;&#x2F;&#39;+file_name,&#39;wb&#39;)as f:</span><br><span class="line">        f.write(response.content)</span><br></pre></td></tr></table></figure>
+              <pre><code>import requests
+import re
+import os
+import urllib
 
-<p><img src="9F2A3DC5A9D149FE8277BAB068E2205C" srcset="/img/loading.gif" alt="image"></p>
+headers={&#39;User-Agent&#39;:&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36&#39;}
+
+response=requests.get(&#39;https://www.vmgirls.com/12985.html&#39;,headers=headers)
+# print(response.request.headers)
+html=response.text
+# 文件夹
+dir_name=re.findall(&#39;&lt;h1 class=&quot;post-title h3&quot;&gt;(.*?)&lt;/h1&gt;&#39;,html)[-1]
+
+if not os.path.exists(dir_name):
+    os.mkdir(dir_name)
+
+urls=re.findall(&#39;&lt;a href=&quot;(.*?)&quot; alt=&quot;.*?&quot; title=&quot;.*?&quot;&gt;&#39;,html)
+print(urls)
+
+for url in urls:
+    file_name=url.split(&#39;/&#39;)[-1]
+    response=requests.get(url,headers=headers)
+    with open(dir_name+&#39;/&#39;+file_name,&#39;wb&#39;)as f:
+        f.write(response.content)</code></pre><p><img src="9F2A3DC5A9D149FE8277BAB068E2205C" srcset="/img/loading.gif" alt="image"></p>
 
             </article>
             <hr>

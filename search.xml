@@ -915,9 +915,30 @@ pipenv --rm</code></pre>
   <entry>
     <title>爬图片素材</title>
     <url>/2020/04/01/%E7%88%AC%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/</url>
-    <content><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import requests</span><br><span class="line">import re</span><br><span class="line">import os</span><br><span class="line">import urllib</span><br><span class="line"></span><br><span class="line">headers&#x3D;&#123;&#39;User-Agent&#39;:&#39;Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;79.0.3945.130 Safari&#x2F;537.36&#39;&#125;</span><br><span class="line"></span><br><span class="line">response&#x3D;requests.get(&#39;https:&#x2F;&#x2F;www.vmgirls.com&#x2F;12985.html&#39;,headers&#x3D;headers)</span><br><span class="line"># print(response.request.headers)</span><br><span class="line">html&#x3D;response.text</span><br><span class="line"># 文件夹</span><br><span class="line">dir_name&#x3D;re.findall(&#39;&lt;h1 class&#x3D;&quot;post-title h3&quot;&gt;(.*?)&lt;&#x2F;h1&gt;&#39;,html)[-1]</span><br><span class="line"></span><br><span class="line">if not os.path.exists(dir_name):</span><br><span class="line">    os.mkdir(dir_name)</span><br><span class="line"></span><br><span class="line">urls&#x3D;re.findall(&#39;&lt;a href&#x3D;&quot;(.*?)&quot; alt&#x3D;&quot;.*?&quot; title&#x3D;&quot;.*?&quot;&gt;&#39;,html)</span><br><span class="line">print(urls)</span><br><span class="line"></span><br><span class="line">for url in urls:</span><br><span class="line">    file_name&#x3D;url.split(&#39;&#x2F;&#39;)[-1]</span><br><span class="line">    response&#x3D;requests.get(url,headers&#x3D;headers)</span><br><span class="line">    with open(dir_name+&#39;&#x2F;&#39;+file_name,&#39;wb&#39;)as f:</span><br><span class="line">        f.write(response.content)</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<pre><code>import requests
+import re
+import os
+import urllib
 
-<p><img src="9F2A3DC5A9D149FE8277BAB068E2205C" alt="image"></p>
+headers={&#39;User-Agent&#39;:&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36&#39;}
+
+response=requests.get(&#39;https://www.vmgirls.com/12985.html&#39;,headers=headers)
+# print(response.request.headers)
+html=response.text
+# 文件夹
+dir_name=re.findall(&#39;&lt;h1 class=&quot;post-title h3&quot;&gt;(.*?)&lt;/h1&gt;&#39;,html)[-1]
+
+if not os.path.exists(dir_name):
+    os.mkdir(dir_name)
+
+urls=re.findall(&#39;&lt;a href=&quot;(.*?)&quot; alt=&quot;.*?&quot; title=&quot;.*?&quot;&gt;&#39;,html)
+print(urls)
+
+for url in urls:
+    file_name=url.split(&#39;/&#39;)[-1]
+    response=requests.get(url,headers=headers)
+    with open(dir_name+&#39;/&#39;+file_name,&#39;wb&#39;)as f:
+        f.write(response.content)</code></pre><p><img src="9F2A3DC5A9D149FE8277BAB068E2205C" srcset="/img/loading.gif" alt="image"></p>
 ]]></content>
   </entry>
   <entry>
@@ -1020,8 +1041,21 @@ pipenv --rm</code></pre>
 </tr>
 </tbody></table>
 <h2 id="烦人的反斜杠"><a href="#烦人的反斜杠" class="headerlink" title="烦人的反斜杠"></a>烦人的反斜杠</h2><p>原生字符串“ ”直观的解决了问题</p>
-<h2 id="RE模块"><a href="#RE模块" class="headerlink" title="RE模块"></a>RE模块</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># encoding: UTF-8</span><br><span class="line">import re</span><br><span class="line"> </span><br><span class="line"># 将正则表达式编译成Pattern对象</span><br><span class="line">pattern &#x3D; re.compile(r&#39;hello&#39;)</span><br><span class="line"> </span><br><span class="line"># 使用Pattern匹配文本，获得匹配结果，无法匹配时将返回None</span><br><span class="line">match &#x3D; pattern.match(&#39;hello world!&#39;)</span><br><span class="line"> </span><br><span class="line">if match:</span><br><span class="line">    # 使用Match获得分组信息</span><br><span class="line">    print match.group()</span><br><span class="line"> </span><br><span class="line">### 输出 ###</span><br><span class="line"># hello</span><br></pre></td></tr></table></figure>
-<h3 id="re-compile-strPattern-flag"><a href="#re-compile-strPattern-flag" class="headerlink" title="re.compile(strPattern[, flag]):"></a>re.compile(strPattern[, flag]):</h3><p>这个方法是Pattern类的工厂方法，用于将字符串形式的正则表达式编译为Pattern对象。 第二个参数flag是匹配模式，取值可以使用按位或运算符’|’表示同时生效，比如re.I | re.M。另外，你也可以在regex字符串中指定模式，比如re.compile(‘pattern’, re.I | re.M)与re.compile(‘(?im)pattern’)是等价的。<br>可选值有：</p>
+<h2 id="RE模块"><a href="#RE模块" class="headerlink" title="RE模块"></a>RE模块</h2><pre><code># encoding: UTF-8
+import re
+
+# 将正则表达式编译成Pattern对象
+pattern = re.compile(r&#39;hello&#39;)
+
+# 使用Pattern匹配文本，获得匹配结果，无法匹配时将返回None
+match = pattern.match(&#39;hello world!&#39;)
+
+if match:
+    # 使用Match获得分组信息
+    print match.group()
+
+### 输出 ###
+# hello</code></pre><h3 id="re-compile-strPattern-flag"><a href="#re-compile-strPattern-flag" class="headerlink" title="re.compile(strPattern[, flag]):"></a>re.compile(strPattern[, flag]):</h3><p>这个方法是Pattern类的工厂方法，用于将字符串形式的正则表达式编译为Pattern对象。 第二个参数flag是匹配模式，取值可以使用按位或运算符’|’表示同时生效，比如re.I | re.M。另外，你也可以在regex字符串中指定模式，比如re.compile(‘pattern’, re.I | re.M)与re.compile(‘(?im)pattern’)是等价的。<br>可选值有：</p>
 <ul>
 <li>re.I(re.IGNORECASE): 忽略大小写（括号内是完整写法，下同）</li>
 <li>M(MULTILINE): 多行模式，改变’^’和’$’的行为（参见上图）</li>
@@ -1030,9 +1064,10 @@ pipenv --rm</code></pre>
 <li>U(UNICODE): 使预定字符类 \w \W \b \B \s \S \d \D 取决于unicode定义的字符属性</li>
 <li>X(VERBOSE): 详细模式。这个模式下正则表达式可以是多行，忽略空白字符，并可以加入注释。以下两个正则表达式是等价的：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a &#x3D; re.compile(r&quot;&quot;&quot;\d +  # the integral part</span><br><span class="line">                   \.    # the decimal point</span><br><span class="line">                   \d *  # some fractional digits&quot;&quot;&quot;, re.X)</span><br><span class="line">b &#x3D; re.compile(r&quot;\d+\.\d*&quot;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="Match"><a href="#Match" class="headerlink" title="Match"></a>Match</h4><p>Match对象是一次匹配的结果，包含了很多关于此次匹配的信息，可以使用Match提供的可读属性或方法来获取这些信息。</p>
+<pre><code>a = re.compile(r&quot;&quot;&quot;\d +  # the integral part
+                   \.    # the decimal point
+                   \d *  # some fractional digits&quot;&quot;&quot;, re.X)
+b = re.compile(r&quot;\d+\.\d*&quot;)</code></pre><h4 id="Match"><a href="#Match" class="headerlink" title="Match"></a>Match</h4><p>Match对象是一次匹配的结果，包含了很多关于此次匹配的信息，可以使用Match提供的可读属性或方法来获取这些信息。</p>
 <p><strong>属性</strong>：</p>
 <ul>
 <li><strong>string</strong>: 匹配时使用的文本。</li>
@@ -1060,9 +1095,19 @@ pipenv --rm</code></pre>
 </li>
 </ul>
 <h4 id="Pattern"><a href="#Pattern" class="headerlink" title="Pattern"></a>Pattern</h4><p>Pattern对象是一个编译好的正则表达式，通过Pattern提供的一系列方法可以对文本进行匹配查找。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import re</span><br><span class="line">p &#x3D; re.compile(r&#39;(\w+) (\w+)(?P&lt;sign&gt;.*)&#39;, re.DOTALL)</span><br><span class="line"> </span><br><span class="line">print &quot;p.pattern:&quot;, p.pattern</span><br><span class="line">print &quot;p.flags:&quot;, p.flags</span><br><span class="line">print &quot;p.groups:&quot;, p.groups</span><br><span class="line">print &quot;p.groupindex:&quot;, p.groupindex</span><br><span class="line"> </span><br><span class="line">### output ###</span><br><span class="line"># p.pattern: (\w+) (\w+)(?P&lt;sign&gt;.*)</span><br><span class="line"># p.flags: 16</span><br><span class="line"># p.groups: 3</span><br><span class="line"># p.groupindex: &#123;&#39;sign&#39;: 3&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>import re
+p = re.compile(r&#39;(\w+) (\w+)(?P&lt;sign&gt;.*)&#39;, re.DOTALL)
 
-<p>以上就是Python对于正则表达式的支持 qwq !!</p>
+print &quot;p.pattern:&quot;, p.pattern
+print &quot;p.flags:&quot;, p.flags
+print &quot;p.groups:&quot;, p.groups
+print &quot;p.groupindex:&quot;, p.groupindex
+
+### output ###
+# p.pattern: (\w+) (\w+)(?P&lt;sign&gt;.*)
+# p.flags: 16
+# p.groups: 3
+# p.groupindex: {&#39;sign&#39;: 3}</code></pre><p>以上就是Python对于正则表达式的支持 qwq !!</p>
 ]]></content>
   </entry>
   <entry>
@@ -1072,8 +1117,9 @@ pipenv --rm</code></pre>
 <p> 如：原来的值;C:\python35，切记前面有分号</p>
 <p>(备注：默认安装时会自动添加环境变量)</p>
 <h1 id="要临时设置环境变量"><a href="#要临时设置环境变量" class="headerlink" title="要临时设置环境变量"></a>要临时设置环境变量</h1><p> 打开命令提示符并使用 set 命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\&gt;set PATH&#x3D;C:\Program Files\Python 3.8;%PATH%</span><br><span class="line">C:\&gt;set PYTHONPATH&#x3D;%PYTHONPATH%;C:\My_python_lib</span><br><span class="line">C:\&gt;python要永久修改默认环境变量，请单击“开始”并搜索“编辑环境变量”，或打开“系统属性” Advanced system settings ，然后单击 Environment Variables 按钮。在此对话框中，您可以添加或修改用户和系统变量。要更改系统变量，您需要对计算机进行无限制访问（即管理员权限）。</span><br></pre></td></tr></table></figure>
-<p>由该控制台启动的任何应用程序都继承设这些设置。</p>
+<pre><code>C:\&gt;set PATH=C:\Program Files\Python 3.8;%PATH%
+C:\&gt;set PYTHONPATH=%PYTHONPATH%;C:\My_python_lib
+C:\&gt;python要永久修改默认环境变量，请单击“开始”并搜索“编辑环境变量”，或打开“系统属性” Advanced system settings ，然后单击 Environment Variables 按钮。在此对话框中，您可以添加或修改用户和系统变量。要更改系统变量，您需要对计算机进行无限制访问（即管理员权限）。</code></pre><p>由该控制台启动的任何应用程序都继承设这些设置。</p>
 <h1 id="要永久修改默认环境变量"><a href="#要永久修改默认环境变量" class="headerlink" title="要永久修改默认环境变量"></a>要永久修改默认环境变量</h1><p>  单击“开始”并搜索“编辑环境变量”，或打开“系统属性” Advanced system settings ，然后单击 Environment Variables 按钮。在此对话框中，您可以添加或修改用户和系统变量。要更改系统变量，您需要对计算机进行无限制访问（即管理员权限）。</p>
 <h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>Windows会将用户变量串联的系统变量 之后 ，这可能会在修改 PATH 时导致意外结果。<br>PYTHONPATH 变量被Python 2和Python 3的所有版本使用，因此除非它只包含与所有已安装的Python版本兼容的代码，否则不要永久配置此变量。</p>
 ]]></content>
@@ -1084,16 +1130,18 @@ pipenv --rm</code></pre>
     <content><![CDATA[<p>使各应用有“独立”的Python运行环境</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>$ pip3 install virtualen</p>
 <h1 id="开始项目"><a href="#开始项目" class="headerlink" title="开始项目"></a>开始项目</h1><h2 id="第一步（创建目录"><a href="#第一步（创建目录" class="headerlink" title="第一步（创建目录)"></a>第一步（创建目录)</h2><p>mkdir myproject<br>cd myproject/</p>
-<h2 id="第二步（创建一个独立的Python运行环境，命名为venv：）"><a href="#第二步（创建一个独立的Python运行环境，命名为venv：）" class="headerlink" title="第二步（创建一个独立的Python运行环境，命名为venv：）"></a>第二步（创建一个独立的Python运行环境，命名为venv：）</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Mac:myproject michael$ virtualenv --no-site-packages venv</span><br><span class="line">Using base prefix &#39;&#x2F;usr&#x2F;local&#x2F;...&#x2F;Python.framework&#x2F;Versions&#x2F;3.4&#39;</span><br><span class="line">New python executable in venv&#x2F;bin&#x2F;python3.4</span><br><span class="line">Also creating executable in venv&#x2F;bin&#x2F;python</span><br><span class="line">Installing setuptools, pip, wheel...done.</span><br></pre></td></tr></table></figure>
-
-<p>命令virtualenv就可以创建一个独立的Python运行环境，我们还加上了参数–no-site-packages，这样，已经安装到系统Python环境中的所有第三方包都不会复制过来，这样，我们就得到了一个不带任何第三方包的“干净”的Python运行环境。</p>
+<h2 id="第二步（创建一个独立的Python运行环境，命名为venv：）"><a href="#第二步（创建一个独立的Python运行环境，命名为venv：）" class="headerlink" title="第二步（创建一个独立的Python运行环境，命名为venv：）"></a>第二步（创建一个独立的Python运行环境，命名为venv：）</h2><pre><code>Mac:myproject michael$ virtualenv --no-site-packages venv
+Using base prefix &#39;/usr/local/.../Python.framework/Versions/3.4&#39;
+New python executable in venv/bin/python3.4
+Also creating executable in venv/bin/python
+Installing setuptools, pip, wheel...done.</code></pre><p>命令virtualenv就可以创建一个独立的Python运行环境，我们还加上了参数–no-site-packages，这样，已经安装到系统Python环境中的所有第三方包都不会复制过来，这样，我们就得到了一个不带任何第三方包的“干净”的Python运行环境。</p>
 <p>新建的Python环境被放到当前目录下的venv目录。有了venv这个Python环境，可以用source进入该环境：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Mac:myproject michael$ source venv&#x2F;bin&#x2F;activate</span><br><span class="line">(venv)Mac:myproject michael$</span><br></pre></td></tr></table></figure>
-<p>有个(venv)前缀，表示当前环境是一个名为venv的Python环境。</p>
+<pre><code>Mac:myproject michael$ source venv/bin/activate
+(venv)Mac:myproject michael$</code></pre><p>有个(venv)前缀，表示当前环境是一个名为venv的Python环境。</p>
 <p>在venv环境下，用pip安装的包都被安装到venv这个环境下，系统Python环境不受任何影响。也就是说，venv环境是专门针对myproject这个应用创建的。</p>
 <p>退出当前的venv环境，使用deactivate命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(venv)Mac:myproject michael$ deactivate </span><br><span class="line">Mac:myproject michael$</span><br></pre></td></tr></table></figure>
-]]></content>
+<pre><code>(venv)Mac:myproject michael$ deactivate 
+Mac:myproject michael$</code></pre>]]></content>
   </entry>
   <entry>
     <title>网络</title>

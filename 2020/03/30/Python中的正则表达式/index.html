@@ -275,8 +275,21 @@
 </tr>
 </tbody></table>
 <h2 id="烦人的反斜杠"><a href="#烦人的反斜杠" class="headerlink" title="烦人的反斜杠"></a>烦人的反斜杠</h2><p>原生字符串“ ”直观的解决了问题</p>
-<h2 id="RE模块"><a href="#RE模块" class="headerlink" title="RE模块"></a>RE模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># encoding: UTF-8</span><br><span class="line">import re</span><br><span class="line"> </span><br><span class="line"># 将正则表达式编译成Pattern对象</span><br><span class="line">pattern &#x3D; re.compile(r&#39;hello&#39;)</span><br><span class="line"> </span><br><span class="line"># 使用Pattern匹配文本，获得匹配结果，无法匹配时将返回None</span><br><span class="line">match &#x3D; pattern.match(&#39;hello world!&#39;)</span><br><span class="line"> </span><br><span class="line">if match:</span><br><span class="line">    # 使用Match获得分组信息</span><br><span class="line">    print match.group()</span><br><span class="line"> </span><br><span class="line">### 输出 ###</span><br><span class="line"># hello</span><br></pre></td></tr></table></figure>
-<h3 id="re-compile-strPattern-flag"><a href="#re-compile-strPattern-flag" class="headerlink" title="re.compile(strPattern[, flag]):"></a>re.compile(strPattern[, flag]):</h3><p>这个方法是Pattern类的工厂方法，用于将字符串形式的正则表达式编译为Pattern对象。 第二个参数flag是匹配模式，取值可以使用按位或运算符’|’表示同时生效，比如re.I | re.M。另外，你也可以在regex字符串中指定模式，比如re.compile(‘pattern’, re.I | re.M)与re.compile(‘(?im)pattern’)是等价的。<br>可选值有：</p>
+<h2 id="RE模块"><a href="#RE模块" class="headerlink" title="RE模块"></a>RE模块</h2><pre><code># encoding: UTF-8
+import re
+
+# 将正则表达式编译成Pattern对象
+pattern = re.compile(r&#39;hello&#39;)
+
+# 使用Pattern匹配文本，获得匹配结果，无法匹配时将返回None
+match = pattern.match(&#39;hello world!&#39;)
+
+if match:
+    # 使用Match获得分组信息
+    print match.group()
+
+### 输出 ###
+# hello</code></pre><h3 id="re-compile-strPattern-flag"><a href="#re-compile-strPattern-flag" class="headerlink" title="re.compile(strPattern[, flag]):"></a>re.compile(strPattern[, flag]):</h3><p>这个方法是Pattern类的工厂方法，用于将字符串形式的正则表达式编译为Pattern对象。 第二个参数flag是匹配模式，取值可以使用按位或运算符’|’表示同时生效，比如re.I | re.M。另外，你也可以在regex字符串中指定模式，比如re.compile(‘pattern’, re.I | re.M)与re.compile(‘(?im)pattern’)是等价的。<br>可选值有：</p>
 <ul>
 <li>re.I(re.IGNORECASE): 忽略大小写（括号内是完整写法，下同）</li>
 <li>M(MULTILINE): 多行模式，改变’^’和’$’的行为（参见上图）</li>
@@ -285,9 +298,10 @@
 <li>U(UNICODE): 使预定字符类 \w \W \b \B \s \S \d \D 取决于unicode定义的字符属性</li>
 <li>X(VERBOSE): 详细模式。这个模式下正则表达式可以是多行，忽略空白字符，并可以加入注释。以下两个正则表达式是等价的：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; re.compile(r&quot;&quot;&quot;\d +  # the integral part</span><br><span class="line">                   \.    # the decimal point</span><br><span class="line">                   \d *  # some fractional digits&quot;&quot;&quot;, re.X)</span><br><span class="line">b &#x3D; re.compile(r&quot;\d+\.\d*&quot;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="Match"><a href="#Match" class="headerlink" title="Match"></a>Match</h4><p>Match对象是一次匹配的结果，包含了很多关于此次匹配的信息，可以使用Match提供的可读属性或方法来获取这些信息。</p>
+<pre><code>a = re.compile(r&quot;&quot;&quot;\d +  # the integral part
+                   \.    # the decimal point
+                   \d *  # some fractional digits&quot;&quot;&quot;, re.X)
+b = re.compile(r&quot;\d+\.\d*&quot;)</code></pre><h4 id="Match"><a href="#Match" class="headerlink" title="Match"></a>Match</h4><p>Match对象是一次匹配的结果，包含了很多关于此次匹配的信息，可以使用Match提供的可读属性或方法来获取这些信息。</p>
 <p><strong>属性</strong>：</p>
 <ul>
 <li><strong>string</strong>: 匹配时使用的文本。</li>
@@ -315,9 +329,19 @@
 </li>
 </ul>
 <h4 id="Pattern"><a href="#Pattern" class="headerlink" title="Pattern"></a>Pattern</h4><p>Pattern对象是一个编译好的正则表达式，通过Pattern提供的一系列方法可以对文本进行匹配查找。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import re</span><br><span class="line">p &#x3D; re.compile(r&#39;(\w+) (\w+)(?P&lt;sign&gt;.*)&#39;, re.DOTALL)</span><br><span class="line"> </span><br><span class="line">print &quot;p.pattern:&quot;, p.pattern</span><br><span class="line">print &quot;p.flags:&quot;, p.flags</span><br><span class="line">print &quot;p.groups:&quot;, p.groups</span><br><span class="line">print &quot;p.groupindex:&quot;, p.groupindex</span><br><span class="line"> </span><br><span class="line">### output ###</span><br><span class="line"># p.pattern: (\w+) (\w+)(?P&lt;sign&gt;.*)</span><br><span class="line"># p.flags: 16</span><br><span class="line"># p.groups: 3</span><br><span class="line"># p.groupindex: &#123;&#39;sign&#39;: 3&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>import re
+p = re.compile(r&#39;(\w+) (\w+)(?P&lt;sign&gt;.*)&#39;, re.DOTALL)
 
-<p>以上就是Python对于正则表达式的支持 qwq !!</p>
+print &quot;p.pattern:&quot;, p.pattern
+print &quot;p.flags:&quot;, p.flags
+print &quot;p.groups:&quot;, p.groups
+print &quot;p.groupindex:&quot;, p.groupindex
+
+### output ###
+# p.pattern: (\w+) (\w+)(?P&lt;sign&gt;.*)
+# p.flags: 16
+# p.groups: 3
+# p.groupindex: {&#39;sign&#39;: 3}</code></pre><p>以上就是Python对于正则表达式的支持 qwq !!</p>
 
             </article>
             <hr>
