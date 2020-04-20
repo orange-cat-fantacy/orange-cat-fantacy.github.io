@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Python类</title>
+    <url>/2020/04/20/Python%E7%B1%BB/</url>
+    <content><![CDATA[<h1 id="一、Python类定义"><a href="#一、Python类定义" class="headerlink" title="一、Python类定义"></a>一、Python类定义</h1><p>类是用来描述具有相同的属性和方法的对象的集合。它定义了该集合中每个对象所共有的属性和方法。对象是类的实例。</p>
+<h1 id="二、Python创建类"><a href="#二、Python创建类" class="headerlink" title="二、Python创建类"></a>二、Python创建类</h1><p>使用<strong>class</strong>语句来创建一个新类，class之后为类的名称并以冒号结尾，类的组成包括成员变量和成员函数。</p>
+<p>注意：python2.2后继承object的目的是使这个类成为new style class，没有继承object的为传统的classic class。</p>
+<p>示例：</p>
+<pre><code class="ruby">class user(object):#一般都写成继承object
+
+&quot;user information &quot;
+
+name=&#39;emma&#39;
+
+age=&#39;18&#39;
+
+def who(self):
+
+print &#39;My name is &#39;+self.name +&quot;.I&#39;m&quot;+str(self.age)+&#39;years old.&#39;</code></pre>
+<h5 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h5><p><strong>1）类中的成员函数必须跟参数self。</strong><br> <strong>2）成员函数调用成员变量时也要加上self。</strong></p>
+<h1 id="三、Python构造函数和析构函数"><a href="#三、Python构造函数和析构函数" class="headerlink" title="三、Python构造函数和析构函数"></a>三、Python构造函数和析构函数</h1><p>1.<code>__init__()</code>方法是一种特殊的方法，被称为类的构造函数或初始化方法，当创建了这个类的实例时就会调用该方法。<br> 2.<code>__del__ ()</code>，被称为类的析构函数，<code>__del__()</code>在对象消逝的时候被调用，当对象不再被使用时，<code>__del__()</code>方法运行。<br> 示例：</p>
+<pre><code class="ruby">class user(object):
+&quot;user information&quot;
+count=0
+def __init__(self,name,age):
+self.name=name
+self.age=age
+user.count+=1
+def who(self):
+print &#39;My name is &#39;+self.name +&quot;.I&#39;m&quot;+str(self.age)+&#39;years old.&#39;
+def __del__(self):
+class_name=self.__class__.__name__
+print class_name,&quot;destroyed&quot;</code></pre>
+<p>注：一定要注意缩进，否则会报错。</p>
+<h1 id="四、Python创建实例对象"><a href="#四、Python创建实例对象" class="headerlink" title="四、Python创建实例对象"></a>四、Python创建实例对象</h1><p>1.要创建一个类的实例，可以使用类的名称，并通过<code>__init__</code>方法接受参数<br> 2.可以使用点(.)来访问对象的属性<br> 3.类的类的文档字符串可以通过<code>ClassName.__doc__</code>查看<br> 示例：</p>
+<pre><code class="ruby">class user(object):
+&quot;user information&quot; #文档注释信息
+count=0
+def __init__(self,name,age):
+self.name=name
+self.age=age
+user.count+=1
+def who(self):
+print &#39;My name is &#39;+self.name +&quot;.I&#39;m &quot; + str(self.age) + &#39; years old.&#39;
+def __del__(self):
+class_name=self.__class__.__name__
+print class_name,&quot;destroyed&quot;
+u1=user(&#39;emma&#39;,18) #创建示例对象u1，类名后面传参，构造方法被调用
+u1.who() #调用类中的成员函数
+printu1.count #调用类中的成员变量
+u2=user(&#39;emma123&#39;,20)
+u2.who()
+printu2.count
+print
+user.__doc__ #查看类文档的信息</code></pre>
+<h5 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h5><p>1）打印字符串时需注意加空格隔开，如’ years old.’引号里面第一个字符为空格。<br> 2）<code>__init__()</code>前后都是两个下划线，如写成一个会报错：<code>TypeError: object() takes no parameters</code><br> =》<code>def_init_</code>应该改为<code>def__init__</code>，其他同理。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>Python面试题前22道</title>
     <url>/2020/04/19/Python%E9%9D%A2%E8%AF%95%E9%A2%98%E5%89%8D22%E9%81%93/</url>
     <content><![CDATA[<h1 id="Python面试题"><a href="#Python面试题" class="headerlink" title="Python面试题"></a>Python面试题</h1><p><strong>1、一行代码实现1–100之和</strong></p>
