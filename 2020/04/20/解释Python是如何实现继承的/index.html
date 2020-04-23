@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="黄杰">
   <meta name="keywords" content="python,随笔">
-  <title>Python类 - huangjie&#39;s blog</title>
+  <title>解释Python是如何实现继承的 - huangjie&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
@@ -130,8 +130,8 @@
               
                 <div class="mt-3 post-meta">
                   <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-                  <time datetime="2020-04-20 19:05">
-                    Monday, April 20th 2020, 7:05 pm
+                  <time datetime="2020-04-20 20:08">
+                    Monday, April 20th 2020, 8:08 pm
                   </time>
                 </div>
               
@@ -141,7 +141,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    642 字
+                    936 字
                   </span>
                 
 
@@ -151,7 +151,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    8
+                    11
                      分钟
                   </span>
                 
@@ -180,58 +180,50 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="一、Python类定义"><a href="#一、Python类定义" class="headerlink" title="一、Python类定义"></a>一、Python类定义</h1><p>类是用来描述具有相同的属性和方法的对象的集合。它定义了该集合中每个对象所共有的属性和方法。对象是类的实例。</p>
-<h1 id="二、Python创建类"><a href="#二、Python创建类" class="headerlink" title="二、Python创建类"></a>二、Python创建类</h1><p>使用<strong>class</strong>语句来创建一个新类，class之后为类的名称并以冒号结尾，类的组成包括成员变量和成员函数。</p>
-<p>注意：python2.2后继承object的目的是使这个类成为new style class，没有继承object的为传统的classic class。</p>
-<p>示例：</p>
-<pre><code class="ruby">class user(object):#一般都写成继承object
-
-&quot;user information &quot;
-
-name=&#39;emma&#39;
-
-age=&#39;18&#39;
-
-def who(self):
-
-print &#39;My name is &#39;+self.name +&quot;.I&#39;m&quot;+str(self.age)+&#39;years old.&#39;</code></pre>
-<h5 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h5><p><strong>1）类中的成员函数必须跟参数self。</strong><br> <strong>2）成员函数调用成员变量时也要加上self。</strong></p>
-<h1 id="三、Python构造函数和析构函数"><a href="#三、Python构造函数和析构函数" class="headerlink" title="三、Python构造函数和析构函数"></a>三、Python构造函数和析构函数</h1><p>1.<code>__init__()</code>方法是一种特殊的方法，被称为类的构造函数或初始化方法，当创建了这个类的实例时就会调用该方法。<br> 2.<code>__del__ ()</code>，被称为类的析构函数，<code>__del__()</code>在对象消逝的时候被调用，当对象不再被使用时，<code>__del__()</code>方法运行。<br> 示例：</p>
-<pre><code class="ruby">class user(object):
-&quot;user information&quot;
-count=0
-def __init__(self,name,age):
-self.name=name
-self.age=age
-user.count+=1
-def who(self):
-print &#39;My name is &#39;+self.name +&quot;.I&#39;m&quot;+str(self.age)+&#39;years old.&#39;
-def __del__(self):
-class_name=self.__class__.__name__
-print class_name,&quot;destroyed&quot;</code></pre>
-<p>注：一定要注意缩进，否则会报错。</p>
-<h1 id="四、Python创建实例对象"><a href="#四、Python创建实例对象" class="headerlink" title="四、Python创建实例对象"></a>四、Python创建实例对象</h1><p>1.要创建一个类的实例，可以使用类的名称，并通过<code>__init__</code>方法接受参数<br> 2.可以使用点(.)来访问对象的属性<br> 3.类的类的文档字符串可以通过<code>ClassName.__doc__</code>查看<br> 示例：</p>
-<pre><code class="ruby">class user(object):
-&quot;user information&quot; #文档注释信息
-count=0
-def __init__(self,name,age):
-self.name=name
-self.age=age
-user.count+=1
-def who(self):
-print &#39;My name is &#39;+self.name +&quot;.I&#39;m &quot; + str(self.age) + &#39; years old.&#39;
-def __del__(self):
-class_name=self.__class__.__name__
-print class_name,&quot;destroyed&quot;
-u1=user(&#39;emma&#39;,18) #创建示例对象u1，类名后面传参，构造方法被调用
-u1.who() #调用类中的成员函数
-printu1.count #调用类中的成员变量
-u2=user(&#39;emma123&#39;,20)
-u2.who()
-printu2.count
-print
-user.__doc__ #查看类文档的信息</code></pre>
-<h5 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h5><p>1）打印字符串时需注意加空格隔开，如’ years old.’引号里面第一个字符为空格。<br> 2）<code>__init__()</code>前后都是两个下划线，如写成一个会报错：<code>TypeError: object() takes no parameters</code><br> =》<code>def_init_</code>应该改为<code>def__init__</code>，其他同理。</p>
+              <h1 id="解释Python是如何实现继承的。"><a href="#解释Python是如何实现继承的。" class="headerlink" title="解释Python是如何实现继承的。"></a>解释Python是如何实现继承的。</h1><p> 对于你定义的每一个类，Python会计算出一个所谓的方法解析顺序(MRO)列表。 这个MRO列表就是一个简单的所有基类的线性顺序表。例如：</p>
+<pre><code>&gt;&gt;&gt; C.__mro__
+(&lt;class &#39;__main__.C&#39;&gt;, &lt;class &#39;__main__.A&#39;&gt;, &lt;class &#39;__main__.B&#39;&gt;,
+&lt;class &#39;__main__.Base&#39;&gt;, &lt;class &#39;object&#39;&gt;)
+&gt;&gt;&gt;</code></pre><p>为了实现继承，Python会在MRO列表上从左到右开始查找基类，直到找到第一个匹配这个属性的类为止。</p>
+<p>而这个MRO列表的构造是通过一个C3线性化算法来实现的。 我们不去深究这个算法的数学原理，它实际上就是合并所有父类的MRO列表并遵循如下三条准则：</p>
+<ul>
+<li>子类会先于父类被检查</li>
+<li>多个父类会根据它们在列表中的顺序被检查</li>
+<li>如果对下一个类存在两个合法的选择，选择第一个父类</li>
+</ul>
+<p>老实说，你所要知道的就是MRO列表中的类顺序会让你定义的任意类层级关系变得有意义。</p>
+<p>当你使用 <code>super()</code> 函数时，Python会在MRO列表上继续搜索下一个类。 只要每个重定义的方法统一使用 <code>super()</code> 并只调用它一次， 那么控制流最终会遍历完整个MRO列表，每个方法也只会被调用一次。 这也是为什么在第二个例子中你不会调用两次 <code>Base.__init__()</code> 的原因。</p>
+<p><code>super()</code> 有个令人吃惊的地方是它并不一定去查找某个类在MRO中下一个直接父类， 你甚至可以在一个没有直接父类的类中使用它。例如，考虑如下这个类：</p>
+<pre><code>class A:
+    def spam(self):
+        print(&#39;A.spam&#39;)
+        super().spam()</code></pre><p>如果你试着直接使用这个类就会出错：</p>
+<pre><code>&gt;&gt;&gt; a = A()
+&gt;&gt;&gt; a.spam()
+A.spam
+Traceback (most recent call last):
+    File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+    File &quot;&lt;stdin&gt;&quot;, line 4, in spam
+AttributeError: &#39;super&#39; object has no attribute &#39;spam&#39;
+&gt;&gt;&gt;</code></pre><p>但是，如果你使用多继承的话看看会发生什么：</p>
+<pre><code>&gt;&gt;&gt; class B:
+...     def spam(self):
+...         print(&#39;B.spam&#39;)
+...
+&gt;&gt;&gt; class C(A,B):
+...     pass
+...
+&gt;&gt;&gt; c = C()
+&gt;&gt;&gt; c.spam()
+A.spam
+B.spam
+&gt;&gt;&gt;</code></pre><p>你可以看到在类A中使用 <code>super().spam()</code> 实际上调用的是跟类A毫无关系的类B中的 <code>spam()</code> 方法。 这个用类C的MRO列表就可以完全解释清楚了：</p>
+<pre><code>&gt;&gt;&gt; C.__mro__
+(&lt;class &#39;__main__.C&#39;&gt;, &lt;class &#39;__main__.A&#39;&gt;, &lt;class &#39;__main__.B&#39;&gt;,
+&lt;class &#39;object&#39;&gt;)
+&gt;&gt;&gt;</code></pre><p>在定义混入类的时候这样使用 <code>super()</code> 是很普遍的。可以参考8.13和8.18小节。</p>
+<p>然而，由于 <code>super()</code> 可能会调用不是你想要的方法，你应该遵循一些通用原则。 首先，确保在继承体系中所有相同名字的方法拥有可兼容的参数签名(比如相同的参数个数和参数名称)。 这样可以确保 <code>super()</code> 调用一个非直接父类方法时不会出错。 其次，最好确保最顶层的类提供了这个方法的实现，这样的话在MRO上面的查找链肯定可以找到某个确定的方法。</p>
+<p>在Python社区中对于 <code>super()</code> 的使用有时候会引来一些争议。 尽管如此，如果一切顺利的话，你应该在你最新代码中使用它。 Raymond Hettinger为此写了一篇非常好的文章 <a href="http://rhettinger.wordpress.com/2011/05/26/super-considered-super" target="_blank" rel="noopener">“Python’s super() Considered Super!”</a> ， 通过大量的例子向我们解释了为什么 <code>super()</code> 是极好的。</p>
 
             </article>
             <hr>
@@ -248,9 +240,9 @@ user.__doc__ #查看类文档的信息</code></pre>
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/04/20/%E8%A7%A3%E9%87%8APython%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF%E7%9A%84/">
+                      <a href="/2020/04/23/tcp,ip/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">解释Python是如何实现继承的</span>
+                        <span class="hidden-mobile">tcp,ip</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -258,8 +250,8 @@ user.__doc__ #查看类文档的信息</code></pre>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/04/19/Python%E9%9D%A2%E8%AF%95%E9%A2%98%E5%89%8D22%E9%81%93/">
-                        <span class="hidden-mobile">Python面试题前22道</span>
+                      <a href="/2020/04/20/Python%E7%B1%BB/">
+                        <span class="hidden-mobile">Python类</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -435,7 +427,7 @@ user.__doc__ #查看类文档的信息</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Python类&nbsp;",
+        "解释Python是如何实现继承的&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 120,
