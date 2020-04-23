@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="黄杰">
   <meta name="keywords" content="python,随笔">
-  <title>Archives - huangjie&#39;s blog</title>
+  <title>记一次python面试 - huangjie&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
@@ -44,7 +44,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -127,6 +127,38 @@
             </span>
 
             
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-04-23 12:50">
+                    Thursday, April 23rd 2020, 12:50 pm
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    718 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    9
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
           </div>
 
           
@@ -137,97 +169,115 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>1、写一个方法，传递两个参数，分别代表年份和月份，计算这个月的天数（可选）。</p>
+<pre><code>import calendar 
+
+monthRange = calendar.monthrange(2016,9) 
+
+print(monthRange)</code></pre><p>2、编写一个健身器材类，要求Use()无参无返回值，负责打印“被使用中” Info()无参无返回值，负责打印设备的所有信息<br>2).<br>编写跑步机类，继承健身器类，在构造函数中修改默认为电力驱动<br>  i. 隐藏Use方法，打印“跑步机被使用中” </p>
+<p>  ii. 添加字段：品牌 </p>
+<p>3).编写哑铃，继承健身器类 隐藏Use方法，打印“哑铃被使用中”<br>4).在测试类中：<br>创建健身器列表，存放不同类型的健身器，依次执行每个元素的Use方法</p>
+<pre><code>class Fitness_Equipment:
+  name=&#39;器材&#39;
+  def use(self,name):
+     print(&quot;被使用中!&quot;)
+  def info()
+   print(&quot;设备所有信息&quot;)
+
+class Treadmill(Fitness_Equipment):
+    def __init__(self):
+        print(&quot;我是电力驱动&quot;)
+     Treadmill.use(treadmill.self)   
+
+class Dumbbel(Fitness_Equipment)
+    dumbbel.use(treadmill.self) 
++</code></pre><p>3、寻找两个有序数组的中位数<br>给定两个大小为 m 和 n 的有序数组 nums1 和 nums2。<br>请你找出这两个有序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。<br>你可以假设 nums1 和 nums2 不会同时为空。</p>
+<p>示例 1:<br>nums1 = [1, 3]<br>nums2 = [2]<br>则中位数是 2.0</p>
+<p>示例 2:<br>nums1 = [1, 2]<br>nums2 = [3, 4]<br>则中位数是 (2 + 3)/2 = 2.5</p>
+<p>4、给定一个数组，它的第 i 个元素是第 i个的值。</p>
+<p>如果你最多只允许完成一次比较，设计一个算法来计算出给定数组中两个数字之间的最大差值。</p>
+<p>例如给定数列 [7,1,5,3,6,4]<br>输出应该是6</p>
+<p>5、计算方阵中1的个数<br>给你一个大小为 m * n 的方阵 mat，方阵由若干1 和 0 。</p>
+<p>请你返回方阵中最少的 k 行的索引，按从最少到最多排序。<br>如果第 i 行的1数量少于第 j 行，或者两行1数量相同但 i 小于 j，那么我们认为第 i 行小于第 j 行。<br>1 总是 排在一行中的靠前位置，也就是说 1 总是出现在 0 之前。</p>
+<p>例子1：<br>输入：mat =<br>[[1,1,0,0,0],<br> [1,1,1,1,0],<br> [1,0,0,0,0],<br> [1,1,0,0,0],<br> [1,1,1,1,1]],<br>k = 3</p>
+<p>输出：[2,0,3]</p>
+<p>每行中的1数目：<br>行 0 -&gt; 2<br>行 1 -&gt; 4<br>行 2 -&gt; 1<br>行 3 -&gt; 2<br>行 4 -&gt; 5<br>从最弱到最强对这些行排序后得到 [2,0,3,1,4]</p>
+<p>例子2：<br>输入：mat =<br>[[1,0,0,0],<br> [1,1,1,1],<br> [1,0,0,0],<br> [1,0,0,0]],<br>k = 2<br>输出：[0,2]<br>解释：<br>每行中的1数目：<br>行 0 -&gt; 1<br>行 1 -&gt; 4<br>行 2 -&gt; 1<br>行 3 -&gt; 1<br>从最弱到最强对这些行排序后得到 [0,2,3,1]</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/23/https%E5%92%8Chttp/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">https和http</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/23/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%8B%B1%E8%AF%AD%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/">
+                        <span class="hidden-mobile">记一次英语面试准备</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
                 
 
-<div class="list-group">
-  <p class="h4">19 posts in total.</p>
-  <hr>
-  
-    
-      
-      <p class="h5">2020</p>
-    
-    <a href="/2020/04/18/shell%E5%91%BD%E4%BB%A4/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">shell命令</span>
-      <span style="float: right;">04-18</span>
-    </a>
-  
-    
-    <a href="/2020/04/17/hexo%E5%91%BD%E4%BB%A4/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">hexo命令</span>
-      <span style="float: right;">04-17</span>
-    </a>
-  
-    
-    <a href="/2020/04/16/%E6%9C%80%E6%96%B0(2020)virtualenv%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">最新(2020)virtualenv的一些命令</span>
-      <span style="float: right;">04-16</span>
-    </a>
-  
-    
-    <a href="/2020/04/16/Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83(%E5%88%9B%E5%BB%BA%E6%BF%80%E6%B4%BB%E6%93%8D%E4%BD%9C%E5%88%A0%E9%99%A4-virtualenv%E3%80%81Pycharm%E3%80%81virtualenvwrapper%E3%80%81pipenv)/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Python虚拟环境(创建激活操作删除-virtualenv、Pycharm、virtualenvwrapper、pipenv)</span>
-      <span style="float: right;">04-16</span>
-    </a>
-  
-    
-    <a href="/2020/04/01/%E7%88%AC%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">爬图片素材</span>
-      <span style="float: right;">04-01</span>
-    </a>
-  
-    
-    <a href="/2020/03/30/Python%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Python中的正则表达式</span>
-      <span style="float: right;">03-30</span>
-    </a>
-  
-    
-    <a href="/2020/03/27/python%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%8D%87%E7%BA%A7/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">python环境变量升级</span>
-      <span style="float: right;">03-27</span>
-    </a>
-  
-    
-    <a href="/2020/03/27/virtualenv%E7%9A%84%E5%AE%89%E8%A3%85/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">virtualenv的安装</span>
-      <span style="float: right;">03-27</span>
-    </a>
-  
-    
-    <a href="/2020/03/26/%E7%BD%91%E7%BB%9C/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">网络</span>
-      <span style="float: right;">03-26</span>
-    </a>
-  
-</div>
-
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/archives/2020/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/2020/">1</a><span class="page-number current">2</span>
-    </span>
-  </nav>
-  
-  <script>
-    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
-      ele.href += '#board';
-    }
-  </script>
-
-
-
               </div>
-            </div>
+            
           </div>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
   </main>
 
@@ -291,6 +341,34 @@
 
 
 
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
 
 
   <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
@@ -318,6 +396,20 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').each(function () {
+        const pre = $(this);
+        if (pre.find('code.mermaid').length > 0) {
+          return;
+        }
+        pre.addClass('prettyprint  linenums');
+      });
+      prettyPrint();
+    })
+  </script>
+
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
@@ -325,7 +417,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Archive&nbsp;",
+        "记一次python面试&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 120,
@@ -368,6 +460,20 @@
   </script>
 
 
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
 
 
 
