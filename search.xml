@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>DNS原理</title>
+    <url>/2020/04/24/DNS%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<p><strong>什么是DNS</strong></p>
+<p>DNS就是域名系统，是因特网中的一项核心服务，是用于实现域名和IP地址相互映射的一个分布式数据库，能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的IP数串。通过主机名，得到该主机名对应的IP地址的过程叫做域名解析（或主机名解析）。</p>
+<p><strong>域名结构解析</strong></p>
+<p><a href="https://pic1.zhimg.com/80/v2-d4ebb1c03acc11c40aa2d0624e98f9f8_720w.jpg" target="_blank" rel="noopener">https://pic1.zhimg.com/80/v2-d4ebb1c03acc11c40aa2d0624e98f9f8_720w.jpg</a></p>
+<p>如上图所示，域名结构是树状结构，树的最顶端代表根服务器，根的下一层就是由我们所熟知的.com、.net、.cn等通用域和.cn、.uk等国家域组成，称为顶级域。网上注册的域名基本都是二级域名，比如<a href="https://link.zhihu.com/?target=http%3A//baidu.com">http://baidu.com</a>、<a href="https://link.zhihu.com/?target=http%3A//taobao.com">http://taobao.com</a>等等二级域名，它们基本上是归企业和运维人员管理。接下来是三级或者四级域名，这里不多赘述。总体概括来说域名是由整体到局部的机制结构。</p>
+<p><strong>DNS解析流程</strong></p>
+<p><a href="https://pic1.zhimg.com/v2-f1e081e30e47c8c1f5af6b944d6eda3c_r.jpg" target="_blank" rel="noopener">https://pic1.zhimg.com/v2-f1e081e30e47c8c1f5af6b944d6eda3c_r.jpg</a></p>
+<p>如上图所示，我们将详细阐述DNS解析流程。</p>
+<p>1、首先客户端位置是一台电脑或手机，在打开浏览器以后，比如输入<a href="https://link.zhihu.com/?target=http%3A//www.zdns.cn">http://www.zdns.cn</a>的域名，它首先是由浏览器发起一个DNS解析请求，如果本地缓存服务器中找不到结果，则首先会向根服务器查询，根服务器里面记录的都是各个顶级域所在的服务器的位置，当向根请求<a href="https://link.zhihu.com/?target=http%3A//www.zdns.cn">http://www.zdns.cn</a>的时候，根服务器就会返回.cn服务器的位置信息。</p>
+<p>2、递归服务器拿到.cn的权威服务器地址以后，就会寻问cn的权威服务器，知不知道<a href="https://link.zhihu.com/?target=http%3A//www.zdns.cn">http://www.zdns.cn</a>的位置。这个时候cn权威服务器查找并返回<a href="https://link.zhihu.com/?target=http%3A//zdns.cn">http://zdns.cn</a>服务器的地址。</p>
+<p>3、继续向<a href="https://link.zhihu.com/?target=http%3A//zdns.cn">http://zdns.cn</a>的权威服务器去查询这个地址，由<a href="https://link.zhihu.com/?target=http%3A//zdns.cn">http://zdns.cn</a>的服务器给出了地址：202.173.11.10</p>
+<p>4、最终才能进行http的链接，顺利访问网站。</p>
+<p>5、这里补充说明，一旦递归服务器拿到解析记录以后，就会在本地进行缓存，如果下次客户端再请求本地的递归域名服务器相同域名的时候，就不会再这样一层一层查了，因为本地服务器里面已经有缓存了，这个时候就直接把<a href="https://link.zhihu.com/?target=http%3A//www.zdns.cn">http://www.zdns.cn</a>的A记录返回给客户端就可以了。</p>
+<p><strong>DNS资源记录</strong></p>
+<p><a href="https://pic1.zhimg.com/80/v2-d218f4a55c62ad85a043f5bc71bbf3c4_720w.jpg" target="_blank" rel="noopener">https://pic1.zhimg.com/80/v2-d218f4a55c62ad85a043f5bc71bbf3c4_720w.jpg</a></p>
+<p>记录一条域名信息映射关系，称之为资源记录（RR）。</p>
+<p>当我们查询域名<a href="https://link.zhihu.com/?target=http%3A//www.zdns.cn">http://www.zdns.cn</a>的时候，查询结果得到的资源记录结构体中有如下数据：</p>
+<p>1、TTL，就是生存周期，是递归服务器会在缓存中保存该资源记录的时长。</p>
+<p>2、网络/协议类型，它的代表的标识是IN，IN就是internet，目前DNS系统主要支持的协议是IN。</p>
+<p>3、type，就是资源记录类型，一般的网站都是都是A记录（IPv4的主机地址）。</p>
+<p>4、rdata是资源记录数据，就是域名关联的信息数据。</p>
+<p><strong>小知识：</strong></p>
+<p>下面我们列出几条常用的资源记录类型：</p>
+<p>A ：Address地址， IPv4</p>
+<p>AAAA：Address地址 IPv6</p>
+<p>NS ：Name Server域名服务器</p>
+<p>SOA：Start of Authority起始授权机构</p>
+<p>MX：Mail Exchanger邮件交换</p>
+<p>CNAME：Canonical Name规范名</p>
+<p>PTR：Pointer指针</p>
+<p>TXT：Text</p>
+<p>SRV：Service</p>
+<p><strong>DNS服务器的分类</strong></p>
+<p><a href="https://pic2.zhimg.com/80/v2-eabb1795b1e3b84a82fc280ba2154639_720w.jpg" target="_blank" rel="noopener">https://pic2.zhimg.com/80/v2-eabb1795b1e3b84a82fc280ba2154639_720w.jpg</a></p>
+<p>常见的DNS服务器就是两种：权威解析服务器和递归解析服务器。递归解析服务器也可以叫做localDNS。</p>
+<p><strong>权威解析服务器</strong></p>
+<p>DNS权威服务器保存着域名空间中部分区域的数据。如果DNS服务器负责管辖一个或多个区域时，称此DNS服务器为这些区域的权威服务器。</p>
+<p>根权威DNS或者二级权威服务器中的资源记录标记被指定为区域权威服务器的DNS服务器。通过资源记录中列出服务器，其他服务器就认为它是该区域的权威服务器。这意味着在 NS 资源记录中指定的任何服务器都被其他服务器当作权威的来源，并且能肯定应答区域内所含名称的查询。</p>
+<p><strong>递归服务器</strong></p>
+<p>递归服务器在正常情况下，初始的时候里面没有任何域名解析数据，里面所有的域名解析数据都来自于它到权威解析服务器的查询结果，一旦查询完毕，递归服务器就会根据TTL时间在本地形成一条缓存记录，并为用户提供DNS解析的查询服务，这是递归服务器的功能。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>https和http</title>
     <url>/2020/04/23/https%E5%92%8Chttp/</url>
     <content><![CDATA[<h3 id="1-什么是协议？"><a href="#1-什么是协议？" class="headerlink" title="1.什么是协议？"></a><strong>1.什么是协议？</strong></h3><p>网络协议是计算机之间为了实现网络通信而达成的一种“约定”或者”规则“，有了这种”约定“，不同厂商的生产设备，以及不同操作系统组成的计算机之间，就可以实现通信。</p>
@@ -163,23 +208,24 @@ class Dumbbel(Fitness_Equipment)
   <entry>
     <title>记一次英语面试准备</title>
     <url>/2020/04/23/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%8B%B1%E8%AF%AD%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/</url>
-    <content><![CDATA[<p>套近乎how are you </p>
-<p>i’m great(重音),how  are you.</p>
-<p>i took the suberway here,it’s great to finally meet you in person.</p>
+    <content><![CDATA[<h2 id="套近乎-how-are-you"><a href="#套近乎-how-are-you" class="headerlink" title="套近乎:how are you ?"></a>套近乎:how are you ?</h2><p>i’m great(重音),how  are you.</p>
+<p>(i took the suberway here,it’s great to finally meet you in person.)</p>
 <p>i’m 24years old,i’m from henan xinyang,i have a Network engineering degree.</p>
-<p>为啥离开前公司</p>
-<p> i want new career challenges.i want to advance my career,i think </p>
-<p>the new job  ofers me more opportunities for me.</p>
-<p>my longterm goals involve growing with the company,where i can continue to learn,take on additional responsibilities and contribute as much value as i can.i intend to take advantage of all this………………………</p>
-<p>薪资</p>
-<p>my salary expectations are in line  with my experience and qualifications .i belive that you will pay  your employee fairly</p>
-<p>其他问题吗</p>
-<p>what’s the growth potential for this position?</p>
 <p>how are you,my name is huangjie,nice to meeet you,you can call me “huang”,i just started in the Technical Support group at  technology company.  i’m looking forward to working with everyone.</p>
 <p>​    that’s my basic information ,i was born and raised in  small-town henan xinyang, now living in hangzhou for a few weeks.i ‘m a Network engineering graduate from tian jing chengjian university.i worked at seiweilanshi technology for about 5 month as a  Technical Support.</p>
-<p>工作中的困难,</p>
-<p>爱好,兴趣</p>
-<p>   i  enjoy ping pong,cooking,i’m an avid Marvel  fan.</p>
+<h2 id="为啥离开前公司"><a href="#为啥离开前公司" class="headerlink" title="为啥离开前公司"></a>为啥离开前公司</h2><p> i want new career challenges.i want to advance my career,i think </p>
+<p>the new job  ofers me more opportunities for me.</p>
+<p>my longterm goals involve growing with the company,where i can continue to learn,take on additional responsibilities and contribute as much value as i can.i intend to take advantage of all this………………………</p>
+<h2 id="薪资"><a href="#薪资" class="headerlink" title="薪资"></a>薪资</h2><p>my salary expectations are in line  with my experience and qualifications .i belive that you will pay  your employee fairly</p>
+<h5 id="其他问题吗"><a href="#其他问题吗" class="headerlink" title="其他问题吗"></a>其他问题吗</h5><p>what’s the growth potential for this position?</p>
+<h2 id="爱好-兴趣"><a href="#爱好-兴趣" class="headerlink" title="爱好,兴趣"></a>爱好,兴趣</h2><p>   i  enjoy ping pong,cooking,i’m an avid Marvel  fan.my favorite city is hangzhou and xingyang.(hangzhou is a city features a perfect blending of hill and water,and lake and town,with water resources,and a ubiquitous yet harmonious presence of rivers,canals,lakes,sea,creek.)hangzou’s picture nature view has earned the fame of “Paradise on earth” for milleniums.</p>
+<p>well,xinyang is my hometown,it’s where i was burn and rise.</p>
+<h2 id="你工作时遇到的最大的难题是什么？"><a href="#你工作时遇到的最大的难题是什么？" class="headerlink" title="你工作时遇到的最大的难题是什么？"></a>你工作时遇到的最大的难题是什么？</h2><p>One of our team members left us because we couldn’t reach an agreement on the task we were running. Even though it was difficult when she quit without notice, we still managed to rearrange the department workload to cover the position until a replacement was hired. Everyone was very busy then. But somehow it helped strengthen our abilities.</p>
+<p>因为对正在进行的任务无法达成一致意见，我们的一位组员离开了我们。虽然她的离开给我们造成了很大困难，但是我们任然成功地重新分配了部门工作量，并且坚持到空缺被补上。那时每个人都很忙，但是这反而锻炼了我们的能力。</p>
+<p>Once, we were faced with a sudden order increase for our new product. It was for a new customer. I immediately sat down with the production supervisor, our materials manager, and the union steward. We were able to lay out a workable plan that maximized hourly labor costs, guaranteed materials were available and, with only a sight adjustment, met the production deadline. While it was challenging and involved long hours, the pay-off was a signed contract with a new customer.</p>
+<p>有一次我们遇到了新产品突然增加订单，是一位新客户。我立刻与生产主任、材料经理、工会代表开会协商。我们制定出来一个可行方案，最大化每小时的劳动量，保证材料供应，而且仅仅用了一个微小的调整，我们就赶上了交货日期。这件事很具挑战性，投入了大量的时间，但是回报很丰厚，我们与新客户签订了合约。</p>
+<p>When I was working on a software implementation team, we took over another company and had to transit many clients to a new product in a short amount of time. It took a lot of planning, time, hard work and effort, but we were able to complete the project in a timely manner.</p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>i’m looking forward to working with everyone.</p>
 ]]></content>
   </entry>
   <entry>
