@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="黄杰">
   <meta name="keywords" content="python,随笔">
-  <title>Archives - huangjie&#39;s blog</title>
+  <title>huangjie&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
@@ -44,7 +44,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 100vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -130,6 +130,10 @@
           </div>
 
           
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
         </div>
       </div>
     </div>
@@ -139,45 +143,54 @@
     
       <div class="container nopadding-md">
         <div class="py-5" id="board"
-          >
+          style=margin-top:0>
           
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="list-group">
-  <p class="h4">21 posts in total.</p>
-  <hr>
-  
+
+  <div class="row mx-auto index-card">
     
-      
-      <p class="h5">2020</p>
     
-    <a href="/2020/03/30/Python%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Python中的正则表达式</span>
-      <span style="float: right;">03-30</span>
-    </a>
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/03/26/%E7%BD%91%E7%BB%9C/">网络</a>
+
+      <a href="/2020/03/26/%E7%BD%91%E7%BB%9C/" class="index-excerpt">
+        
+        
+          
+        
+        <div>网络层次划分应用层表示层会话层传输层网络层数据链路层物理层
+协议tcp ipTCP/IP协议涵盖了OSI参考模型的第三层、第四层，即网络层、传输层。TCP/IP也不是只有TCP + IP这两种协议，它是协议栈的统称，它还包括 ARP，ICMP，IGMP，UDP，以及让域名访问成为可能的DNS，以及电脑/手机可以自动获取IP地址的DHCP。当然还有形形色色的应用层的协议如 HTTP / SMTP /</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-03-26
+          </div>
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/2/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    </span>
+  </nav>
   
-    
-    <a href="/2020/03/27/python%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%8D%87%E7%BA%A7/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">python环境变量升级</span>
-      <span style="float: right;">03-27</span>
-    </a>
-  
-    
-    <a href="/2020/03/27/virtualenv%E7%9A%84%E5%AE%89%E8%A3%85/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">virtualenv的安装</span>
-      <span style="float: right;">03-27</span>
-    </a>
-  
-    
-    <a href="/2020/03/26/%E7%BD%91%E7%BB%9C/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">网络</span>
-      <span style="float: right;">03-26</span>
-    </a>
-  
-</div>
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 
@@ -283,7 +296,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Archive&nbsp;",
+        "欲寄彩笺兼尺素，山长水阔知何处&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 120,
